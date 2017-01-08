@@ -82,8 +82,8 @@ public class ShipController : MonoBehaviour {
     foreach (var ghost in ghosts)
     {
       // if the ghost ship is inside the big box
-      if (ghost.position.x < screenWidth && ghost.position.x > -screenWidth &&
-          ghost.position.y < screenHeight && ghost.position.y > -screenHeight)
+      if (ghost.position.x < screenWidth/2 && ghost.position.x > -screenWidth/2 &&
+          ghost.position.y < screenHeight/2 && ghost.position.y > -screenHeight/2)
       {
         // then set our middle ship, to where the ghost is
         transform.position = ghost.position;
@@ -116,7 +116,7 @@ public class ShipController : MonoBehaviour {
   {
     rb.AddForce(new Vector2(CrossPlatformInputManager.GetAxis("Horizontal"), CrossPlatformInputManager.GetAxis("Vertical")).normalized * force_multiplier);
     
-    //SwapShips();
+    SwapShips();
   }
 
 	// Update is called once per frame
