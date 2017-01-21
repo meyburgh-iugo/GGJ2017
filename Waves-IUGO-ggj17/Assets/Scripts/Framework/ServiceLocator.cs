@@ -6,8 +6,6 @@ using SNS;
 
 public class ServiceLocator : Singleton<ServiceLocator>
 {
-  public string SceneNameAfterLoad;
-
   static AudioManager sAudioManager;
   static DataManager sDataManager;
   static InputHandler sInputHandler;
@@ -27,8 +25,6 @@ public class ServiceLocator : Singleton<ServiceLocator>
     sInputHandler = new InputHandler();
 
     sEventSystem = new EventSystem();
-
-    SceneManager.LoadScene(SceneNameAfterLoad);
   }
 
   public static AudioManager GetAudioManager()

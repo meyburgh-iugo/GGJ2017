@@ -12,6 +12,7 @@ public class AudioManager
       BUTTONCLICK = 0,
       CORRECTTAP = 1,
       WRONGTAP = 2,
+      SONAR = 3
   }
 
   class AudioObject
@@ -72,16 +73,17 @@ public class AudioManager
         Debug.Log(i + " not inialized");    
     }
     // Loading audio clips
-    clips.Add(Clips.BUTTONCLICK, new AudioObject(Resources.Load<AudioClip>("AudioClips/button_click"), 1.0f));
-    clips.Add(Clips.CORRECTTAP, new AudioObject(Resources.Load<AudioClip>("AudioClips/correct_clip"), 1.0f));
-    clips.Add(Clips.WRONGTAP, new AudioObject(Resources.Load<AudioClip>("AudioClips/wrong_clip"), 1.0f));
+    //clips.Add(Clips.BUTTONCLICK, new AudioObject(Resources.Load<AudioClip>("AudioClips/button_click"), 1.0f));
+    //clips.Add(Clips.CORRECTTAP, new AudioObject(Resources.Load<AudioClip>("AudioClips/correct_clip"), 1.0f));
+    //clips.Add(Clips.WRONGTAP, new AudioObject(Resources.Load<AudioClip>("AudioClips/wrong_clip"), 1.0f));
+    clips.Add(Clips.SONAR, new AudioObject(Resources.Load<AudioClip>("AudioClips/sonar_clip"), 1.0f));
 
-    music = audioGO.AddComponent<AudioSource>();
-    music.clip = Resources.Load<AudioClip>("AudioClips/soundtrack");
-    music.volume = 0.05f;
-    music.loop = true;
+    //music = audioGO.AddComponent<AudioSource>();
+    //music.clip = Resources.Load<AudioClip>("AudioClips/soundtrack");
+    //music.volume = 0.05f;
+    //music.loop = true;
 
-    StartMusic();
+    //StartMusic();
   }
 
   public bool AudioActived()
