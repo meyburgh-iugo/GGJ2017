@@ -44,7 +44,7 @@ public class Photon : MonoBehaviour
 
   public void OnCollisionEnter2D(Collision2D collision)
   {
-    if(!collision.gameObject.CompareTag("Player") || !collision.gameObject.CompareTag("Light"))
+    if(collision.gameObject.CompareTag("Obstacle"))
     {
       ServiceLocator.GetAudioManager().Register(AudioManager.Clips.SONAR);
     }
