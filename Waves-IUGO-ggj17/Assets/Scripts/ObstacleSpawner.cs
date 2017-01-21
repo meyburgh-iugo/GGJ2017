@@ -42,7 +42,7 @@ public class ObstacleSpawner : MonoBehaviour {
     ++counter;
     int index = counter % objectCount;
 
-    if ((obstacles[index].transform.position - player.position).magnitude > maxDistance) {
+    if ((obstacles[index].transform.position - player.position).magnitude > maxDistance/2) {
       Rigidbody2D body = obstacles[index].GetComponent<Rigidbody2D> ();
       obstacles[index].transform.position = new Vector3(player.position.x + Random.Range(-maxDistance/2, maxDistance/2), player.position.y + Random.Range(-maxDistance/2, maxDistance/2));
       obstacles[index].transform.localScale = new Vector3(Random.Range(0.25f, 10), Random.Range(0.25f, 10), 1);
