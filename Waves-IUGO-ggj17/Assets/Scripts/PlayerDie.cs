@@ -29,7 +29,7 @@ public class PlayerDie : MonoBehaviour
     switch (deathKind)
     {
       case 0:
-        MessagePooler.Instance.QueueMessage("Ops, you died.");
+        MessagePooler.Instance.QueueMessage("Oops, you died.");
         PlayerPrefs.SetInt("StartingText", 1);
         break;
       case 1:

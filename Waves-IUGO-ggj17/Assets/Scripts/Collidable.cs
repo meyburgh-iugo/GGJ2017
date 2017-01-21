@@ -11,12 +11,11 @@ public class Collidable : MonoBehaviour
     light
   }
   public Kind kind;
-  
+
   // Use this for initialization
-	void Awake ()
+  void Awake ()
   {
-		
-	}
+  }
 
   // Update is called once per frame
   public void OnCollisionEnter2D(Collision2D collision)
