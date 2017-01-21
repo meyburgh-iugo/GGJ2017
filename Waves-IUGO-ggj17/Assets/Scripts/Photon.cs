@@ -47,6 +47,7 @@ public class Photon : MonoBehaviour
     {
       color = new Vector3(0, 0.6f, 0);
       rb.velocity = Vector2.zero; // -collision.relativeVelocity.normalized;
+      rb.position = collision.contacts[0].point;
       lifeSpan = Mathf.Clamp(lifeSpan + collision.relativeVelocity.magnitude, 0, 2);
     }
   }
