@@ -13,7 +13,8 @@ public class PlayerCamera : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-    transform.position = Vector3.Lerp (transform.position, goal.position, 0.5f * Time.deltaTime) + offset;
+	void LateUpdate () {
+    Vector3 pos = new Vector3(Mathf.Lerp (transform.position.x, goal.position.x, 0.5f * Time.deltaTime), Mathf.Lerp (transform.position.y, goal.position.y, 0.5f * Time.deltaTime), transform.position.z);
+    transform.position = pos;
 	}
 }
