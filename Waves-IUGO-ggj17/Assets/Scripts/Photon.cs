@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,16 +13,16 @@ public class Photon : MonoBehaviour
 
   private void Awake()
   {
-    color = new Vector3(0, 0, 0);
+    color = new Vector3(1, 1, 1);
     sprite = GetComponent<SpriteRenderer>();
     rb = GetComponent<Rigidbody2D>();
-    sprite.color = new Color(color.x, color.z, color.y, alpha);
+    sprite.color = new Color(color.x, color.y, color.z, alpha);
   }
 
   private void Update()
   {
     alpha -= Time.deltaTime * 1.0f/lifeSpan;
-    sprite.color = new Color(color.x, color.z, color.y, alpha);
+    sprite.color = new Color(color.x, color.y, color.z, alpha);
   }
 
   public void Setup(Vector2 dir, float _lifeSpan, float speed)
@@ -34,7 +35,7 @@ public class Photon : MonoBehaviour
 
   public void OnCollisionEnter2D(Collision2D collision)
   {
-    float r = Random.Range(0.0f, 1.0f);
+    float r = UnityEngine.Random.Range(0.0f, 1.0f);
     if (r > 0.7f)
     {
       color = new Vector3(0, 0.6f, 0);
@@ -42,7 +43,6 @@ public class Photon : MonoBehaviour
     }
   }
 
-  // Update is called once per frame
   void Die()
   {
     Destroy(gameObject);
