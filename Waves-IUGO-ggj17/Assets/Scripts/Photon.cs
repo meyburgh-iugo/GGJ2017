@@ -39,12 +39,12 @@ public class Photon : MonoBehaviour
 
   public void OnCollisionEnter2D(Collision2D collision)
   {
-    lifeSpan = Mathf.Clamp(lifeSpan + collision.relativeVelocity.sqrMagnitude, 0, 1);
     float r = Random.Range(0.0f, 1.0f);
     if (r > 0.7f)
     {
       color = new Vector3(0, 0.6f, 0);
       rb.velocity = Vector2.zero; // -collision.relativeVelocity.normalized;
+      lifeSpan = Mathf.Clamp(lifeSpan + collision.relativeVelocity.magnitude, 0, 2);
     }
   }
 }
