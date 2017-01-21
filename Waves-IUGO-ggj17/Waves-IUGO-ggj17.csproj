@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Framework\ServiceLocator.cs" />
     <Compile Include="Assets\Scripts\Framework\Singleton.cs" />
     <Compile Include="Assets\Scripts\HideOnStart.cs" />
+    <Compile Include="Assets\Scripts\ObstacleSpawner.cs" />
     <Compile Include="Assets\Scripts\Photon.cs" />
     <Compile Include="Assets\Scripts\PhotonSpawner.cs" />
   </ItemGroup>
