@@ -7,7 +7,7 @@ public class ObstacleSpawner : MonoBehaviour {
   public GameObject[] primitives;
   public int objectCount = 50;
   private int counter = 0;
-  public Transform goal;
+  public Transform player;
   private int maxDistance = 30;
   private List<GameObject> obstacles;
 
@@ -42,9 +42,14 @@ public class ObstacleSpawner : MonoBehaviour {
     ++counter;
     int index = counter % objectCount;
 
-    if ((obstacles[index].transform.position - goal.position).magnitude > maxDistance) {
+    if ((obstacles[index].transform.position - player.position).magnitude > maxDistance) {
       Rigidbody2D body = obstacles[index].GetComponent<Rigidbody2D> ();
-      body.AddForce ((goal.position - obstacles[index].transform.position).normalized, ForceMode2D.Impulse);
+      obstacles[index].transform.position = new Vector3(player.position.x + Random.Range(-maxDistance/2, maxDistance/2), player.position.y + Random.Range(-maxDistance/2, maxDistance/2));
+      obstacles[index].transform.localScale = new Vector3(Random.Range(0.25f, 10), Random.Range(0.25f, 10), 1);
+      obstacles[index].transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+      obstacles[index].transform.parent = transform;
+      body.AddForce(new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
+      body.mass = 1000000;
     }
   }
 }

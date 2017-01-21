@@ -24,18 +24,16 @@ public class Collidable : MonoBehaviour
     {
       case Kind.obstacle:
       {
-          if (collision.gameObject.CompareTag("Player"))
+          if (collision.gameObject.CompareTag("Player") && !collision.gameObject.GetComponent<PlayerDie>().IsDead)
           {
-            GetComponent<Collider>().enabled = false;
             StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die(PlayerPrefs.GetInt("StartingText",1) < 2 ? 0 : 2));
           }
           break;
       }
       case Kind.light:
       {
-          if (collision.gameObject.CompareTag("Player"))
+          if (collision.gameObject.CompareTag("Player") && !collision.gameObject.GetComponent<PlayerDie>().IsDead)
           {
-            GetComponent<Collider>().enabled = false;
             StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die(1));
           }
           break;

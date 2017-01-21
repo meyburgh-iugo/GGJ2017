@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDie : MonoBehaviour
 {
+  private bool isDead = false;
+  public bool IsDead { get { return isDead;  } }
+
 	// Use this for initialization
 	void Start ()
   {
@@ -14,12 +17,13 @@ public class PlayerDie : MonoBehaviour
 	// Update is called once per frame
 	public IEnumerator Die (int deathKind)
   {
+    isDead = true;
     PlayerPrefs.SetInt("Lives", PlayerPrefs.GetInt("Lives", 0) - 1);
     GetComponent<Movement>().enabled = false;
 
     if (PlayerPrefs.GetInt("Lives", 0) == -10)
     {
-      MessagePooler.Instance.QueueMessage("Happy -10 lives, it an impressive milestone.");
+      MessagePooler.Instance.QueueMessage("Happy -10 lives, it is an impressive milestone.");
       MessagePooler.Instance.QueueMessage("You are doing great!");
       yield return new WaitForSeconds(8.0f);
     }
