@@ -1,0 +1,23 @@
+{
+	"data" :[
+		{   
+			"type" : "Regular",
+			"speed" : 150,
+			"life" : 100,
+			"shoot_rate" : 0.5
+		},
+		{
+			"type" : "Fast",
+			"speed" : 200,
+			"life" : 70,
+			"shoot_rate" : 0.5
+		},
+		{
+			"type" : "Strong",
+			"speed" : 90,
+			"life" : 200,
+			"shoot_rate" : 1
+		}
+	]
+}
+	
