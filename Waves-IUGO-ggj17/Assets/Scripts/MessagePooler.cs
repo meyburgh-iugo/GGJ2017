@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MessagePooler : Singleton<MonoBehaviour>
+public class MessagePooler : Singleton<MessagePooler>
 {
-  public string[] messages;
-  public float messageLong;
+  public string[][] messages;
   public Queue<string> messagesQueue;
 
   private MessageFade fade;
-
-  private void Awake()
-  {
-    messagesQueue = new Queue<string>();
-  }
-
+  public MessageFade Fade { get { return fade;  } }
   void Start ()
   {
+    messagesQueue = new Queue<string>();
     fade = GetComponent<MessageFade>();
-    fade.OnFinishFade += UnstackMessage;
+    fade.OnFinishFade += DequeueMessage;
 
-		for (int i = 0; i < messages.Length; i++)
+    messages = new string[3][];
+    messages[0] = new string[1] { "Relax, you cannot die..." };
+    messages[1] = new string[2] { "Darkness is not safe...", "Try light" };
+    messages[2] = new string[1] { "No pressure, go deeper..." };
+
+    int deaths = PlayerPrefs.GetInt("DeathCount", 0);
+		for (int i = 0; i < messages[deaths].Length; i++)
     {
-      messagesQueue.Enqueue(messages[i]);
+      messagesQueue.Enqueue(messages[deaths][i]);
     }
 
     if (messagesQueue.Count > 0)
@@ -31,7 +32,7 @@ public class MessagePooler : Singleton<MonoBehaviour>
     }
   }
 
-  void StackMessage(string message)
+  public void QueueMessage(string message)
   {
     messagesQueue.Enqueue(message);
     if (!fade.IsPlaying)
@@ -41,7 +42,7 @@ public class MessagePooler : Singleton<MonoBehaviour>
   }
 	
 	// Update is called once per frame
-	void UnstackMessage ()
+	void DequeueMessage ()
   {
     var message = messagesQueue.Dequeue();
     if (message != null)
