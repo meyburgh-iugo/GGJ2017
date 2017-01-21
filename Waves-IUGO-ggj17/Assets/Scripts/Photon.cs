@@ -39,7 +39,7 @@ public class Photon : MonoBehaviour
 
   public void OnCollisionEnter2D(Collision2D collision)
   {
-    lifeSpan += 1.0f;
+    lifeSpan = Mathf.Clamp(lifeSpan + collision.relativeVelocity.sqrMagnitude, 0, 1);
     float r = Random.Range(0.0f, 1.0f);
     if (r > 0.7f)
     {
