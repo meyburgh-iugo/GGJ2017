@@ -26,6 +26,7 @@ public class Collidable : MonoBehaviour
       {
           if (collision.gameObject.CompareTag("Player"))
           {
+            GetComponent<Collider>().enabled = false;
             StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die(PlayerPrefs.GetInt("StartingText",1) < 2 ? 0 : 2));
           }
           break;
@@ -34,6 +35,7 @@ public class Collidable : MonoBehaviour
       {
           if (collision.gameObject.CompareTag("Player"))
           {
+            GetComponent<Collider>().enabled = false;
             StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die(1));
           }
           break;

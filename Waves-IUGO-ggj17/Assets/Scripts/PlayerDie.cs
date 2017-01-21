@@ -17,7 +17,7 @@ public class PlayerDie : MonoBehaviour
     PlayerPrefs.SetInt("Lives", PlayerPrefs.GetInt("Lives", 0) - 1);
     GetComponent<Movement>().enabled = false;
 
-    if (PlayerPrefs.GetInt("Lives", 0) == -1)
+    if (PlayerPrefs.GetInt("Lives", 0) == -10)
     {
       MessagePooler.Instance.QueueMessage("Happy -10 lives, it an impressive milestone.");
       MessagePooler.Instance.QueueMessage("You are doing great!");
