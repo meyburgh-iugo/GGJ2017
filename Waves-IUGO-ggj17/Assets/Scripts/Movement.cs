@@ -23,7 +23,7 @@ public class Movement : MonoBehaviour
     var vert = Input.GetAxis("Vertical");
     var hori = Input.GetAxis("Horizontal");
 
-    rb.AddTorque (-hori * Time.deltaTime * turnSpeed);
+    rb.rotation += (-hori * Time.deltaTime * turnSpeed);
     rb.AddForce (new Vector2 (t.right.x * speed * Time.deltaTime * vert, t.right.y * speed * Time.deltaTime * vert), ForceMode2D.Impulse);
   }
 }

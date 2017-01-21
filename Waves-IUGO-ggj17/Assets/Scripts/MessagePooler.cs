@@ -20,7 +20,7 @@ public class MessagePooler : Singleton<MessagePooler>
     messages[1] = new string[2] { "Darkness is not safe...", "Try light" };
     messages[2] = new string[1] { "No pressure, go deeper..." };
 
-    int deaths = PlayerPrefs.GetInt("DeathCount", 0);
+    int deaths = PlayerPrefs.GetInt("StartingText", 0);
 		for (int i = 0; i < messages[deaths].Length; i++)
     {
       messagesQueue.Enqueue(messages[deaths][i]);
@@ -44,10 +44,9 @@ public class MessagePooler : Singleton<MessagePooler>
 	// Update is called once per frame
 	void DequeueMessage ()
   {
-    var message = messagesQueue.Dequeue();
-    if (message != null)
+    if (messagesQueue.Count > 0)
     {
-      fade.ShowMessage(message);
+      fade.ShowMessage(messagesQueue.Dequeue());
     }
 	}
 }

@@ -27,8 +27,7 @@ public class Collidable : MonoBehaviour
       {
           if (collision.gameObject.CompareTag("Player"))
           {
-            PlayerPrefs.SetInt("DeathCount", 0);
-            StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die());
+            StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die(PlayerPrefs.GetInt("StartingText",1) < 2 ? 0 : 2));
           }
           break;
       }
@@ -36,8 +35,7 @@ public class Collidable : MonoBehaviour
       {
           if (collision.gameObject.CompareTag("Player"))
           {
-            PlayerPrefs.SetInt("DeathCount", 1);
-            StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die());
+            StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die(1));
           }
           break;
       }

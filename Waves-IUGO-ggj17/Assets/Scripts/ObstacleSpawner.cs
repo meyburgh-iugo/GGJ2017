@@ -9,11 +9,14 @@ public class ObstacleSpawner : MonoBehaviour {
   private int counter = 0;
   public Transform goal;
   private int maxDistance = 30;
+  private List<GameObject> obstacles;
 
 	// Use this for initialization
 	void Start ()
   {
-	  for (int i = 0; i < objectCount; i++)
+    obstacles = new List<GameObject>();
+
+    for (int i = 0; i < objectCount; i++)
     {
       SpawnerARandomObstacle();
     }
@@ -30,6 +33,8 @@ public class ObstacleSpawner : MonoBehaviour {
     Rigidbody2D body = go.AddComponent<Rigidbody2D> ();
     body.AddForce (new Vector2 (Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
     body.mass = 1000000;
+
+    obstacles.Add(go);
   }
 
   void Update()
@@ -37,9 +42,9 @@ public class ObstacleSpawner : MonoBehaviour {
     ++counter;
     int index = counter % objectCount;
 
-    if ((primitives[index].transform.position - goal.position).magnitude > maxDistance) {
-      Rigidbody2D body = primitives [index].GetComponent<Rigidbody2D> ();
-      body.AddForce ((goal.position - primitives[index].transform.position).normalized, ForceMode2D.Impulse);
+    if ((obstacles[index].transform.position - goal.position).magnitude > maxDistance) {
+      Rigidbody2D body = obstacles[index].GetComponent<Rigidbody2D> ();
+      body.AddForce ((goal.position - obstacles[index].transform.position).normalized, ForceMode2D.Impulse);
     }
   }
 }
