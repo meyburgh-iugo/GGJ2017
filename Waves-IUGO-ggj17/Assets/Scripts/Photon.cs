@@ -9,6 +9,7 @@ public class Photon : MonoBehaviour
   private float alpha;
   private float lifeSpan;
   private Vector3 color;
+  private float maxLifeSpan;
 
   private void Awake()
   {
@@ -24,7 +25,8 @@ public class Photon : MonoBehaviour
     sprite.color = new Color(color.x, color.y, color.z, alpha);
 
     lifeSpan -= Time.deltaTime;
-    if (lifeSpan <= 0)
+    maxLifeSpan -= Time.deltaTime;
+    if (lifeSpan <= 0 || maxLifeSpan <= 0)
     {
       Destroy(gameObject);
     }
@@ -33,6 +35,7 @@ public class Photon : MonoBehaviour
   public void Setup(Vector2 dir, float _lifeSpan, float speed)
   {
     lifeSpan = _lifeSpan;
+    maxLifeSpan = 3 * lifeSpan;
     rb.velocity = dir.normalized * speed;
     alpha = 1.0f;
   }
