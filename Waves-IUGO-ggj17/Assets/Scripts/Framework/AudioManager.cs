@@ -125,7 +125,10 @@ public class AudioManager
     AudioObject obj;
     if (clips.TryGetValue(clip, out obj))
     {
-      queue.Enqueue(obj);
+      if (!queue.Contains(obj))
+      {
+        queue.Enqueue(obj);
+      }
     }
     // if there is space to play a clip, call it.
     if (queue.Count < MAX_AUDIO)
