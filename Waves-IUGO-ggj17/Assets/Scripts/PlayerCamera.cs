@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour {
-<<<<<<< Updated upstream
   private Rigidbody2D player;
-  private float abyssStart = 50.0f;
-=======
-  public Transform goal;
   private float abyssStart = 100.0f;
->>>>>>> Stashed changes
+
   private float target_z = -10.0f;
 
   private float smoothSpeed = 0.2f;
