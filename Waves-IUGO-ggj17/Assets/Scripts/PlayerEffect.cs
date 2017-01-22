@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerEffect : MonoBehaviour
+public abstract class PlayerEffect
 {
   public float Duration = 0.0f;
 

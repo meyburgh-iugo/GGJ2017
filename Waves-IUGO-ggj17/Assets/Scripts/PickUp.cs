@@ -19,17 +19,17 @@ public class PickUp : MonoBehaviour
 
   }
 
-  public void SetEffect(PlayerEffect Effect)
+  public void SetEffect(PlayerEffect NewEffect)
   {
-
+    Effect = NewEffect;
   }
 
-  public void OnCollisionEnter2D(Collision2D collision)
+  public void OnTriggerEnter2D(Collider2D other)
   {
-    if (collision.gameObject.CompareTag("Player") && !collision.gameObject.GetComponent<PlayerDie>().IsDead)
+    if (other.gameObject.CompareTag("Player") && !other.gameObject.GetComponent<PlayerDie>().IsDead)
     {
-      PlayerEffectSlot slot = GetComponentInParent<PlayerEffectSlot>();
-      if(slot.Empty())
+      PlayerEffectSlot slot = other.gameObject.GetComponent<PlayerEffectSlot>();
+      if(slot != null && slot.Empty())
       {
         slot.Fill(Effect);
         Destroy(gameObject);
