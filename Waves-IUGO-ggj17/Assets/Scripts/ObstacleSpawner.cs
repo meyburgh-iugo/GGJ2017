@@ -51,6 +51,7 @@ public class ObstacleSpawner : MonoBehaviour {
 
     body.drag = 0;
     body.angularDrag = 0;
+
     obstacles.Add(go);
   }
 

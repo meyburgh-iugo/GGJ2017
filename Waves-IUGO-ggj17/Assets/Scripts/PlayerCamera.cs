@@ -3,30 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour {
-  public Transform goal;
-  public float abyssStart = 50.0f;
+  private Rigidbody2D player;
+  private float abyssStart = 50.0f;
   private float target_z = -10.0f;
 
   private float smoothSpeed = 0.2f;
   private float initOrtho = 0.5f;
-  private float targetOrtho = 5.0f;
+  private float maxOrtho = 5.0f;
 
   private Camera cam;
 	// Use this for initialization
 	void Start () {
+    player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+
     cam = GetComponent<Camera>();
-    cam.transform.position = goal.transform.position;
+    cam.transform.position = player.transform.position;
     cam.orthographicSize = initOrtho;
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-    Vector3 pos = new Vector3(Mathf.Lerp(transform.position.x, goal.position.x, 0.5f * Time.deltaTime), Mathf.Lerp(transform.position.y, goal.position.y, 0.5f * Time.deltaTime), target_z);
+    
+    Vector3 pos = new Vector3(Mathf.Lerp(transform.position.x, player.position.x, 0.5f * Time.deltaTime), Mathf.Lerp(transform.position.y, player.position.y, 0.8f * Time.deltaTime), target_z);
     transform.position = pos;
 
+    float targetOrtho = 8 * (1 / (1 + Mathf.Exp(-player.velocity.magnitude + 1.5f)));
+    targetOrtho = Mathf.Clamp(targetOrtho, initOrtho, maxOrtho);
     cam.orthographicSize = Mathf.MoveTowards (Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
 
-    float time = -goal.position.y / abyssStart; 
+    float time = -player.position.y / abyssStart; 
     cam.backgroundColor = new Color(0, Mathf.Lerp(0.44f, 0.0f, time), Mathf.Lerp(0.50f, 0.0f, time));
   }
 }
