@@ -17,7 +17,7 @@ public class RandomMessageManager : MonoBehaviour
   {
     player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
-    TotallyRandomMessage = new string[28][];
+    TotallyRandomMessage = new string[30][];
 
     TotallyRandomMessage[0] = new string[] { "Well, isn't this a fine kettle of fish?!" };
     TotallyRandomMessage[1] = new string[] { "Donkey Kong is not even a donkey." };
@@ -38,7 +38,7 @@ public class RandomMessageManager : MonoBehaviour
     TotallyRandomMessage[16] = new string[] { "This game is legen...", " wait for it...", "...dary." };
     TotallyRandomMessage[17] = new string[] { "OH MY GOD! THEY KILLED KENNY! YOU BASTARDS!" };
     TotallyRandomMessage[18] = new string[] { "You're playing so well...", "That you're fired!" };
-    TotallyRandomMessage[19] = new string[] { "19, huh?", "Cool, I prime number." };
+    TotallyRandomMessage[19] = new string[] { "19, huh?", "Cool, It is a prime number." };
     TotallyRandomMessage[20] = new string[] { "What's up, player?" };
     TotallyRandomMessage[21] = new string[] { "I have a bad feeling about this" };
     TotallyRandomMessage[22] = new string[] { "It is the Demogorgon." };
@@ -47,8 +47,10 @@ public class RandomMessageManager : MonoBehaviour
     TotallyRandomMessage[25] = new string[] { "Yoh, mah player, keep it random." };
     TotallyRandomMessage[26] = new string[] { "The bar needs to be raised!...", "No one appreciates what I'm trying to do!" };
     TotallyRandomMessage[27] = new string[] { "Do you like fish sticks?"};
+    TotallyRandomMessage[28] = new string[] { "Check those barrels!" };
+    TotallyRandomMessage[29] = new string[] { "You should do the best game you can!", "It's portfolio." };
 
-    TotallyRandomIndexes = new List<int>() {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27};
+    TotallyRandomIndexes = new List<int>() {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29};
 
     MilestoneMessage = new string[1][];
     MilestoneMessage[0] = new string[] { "Yo, player. You should be going down...", "There is nothing up here, just painful death" };
@@ -64,9 +66,12 @@ public class RandomMessageManager : MonoBehaviour
 		if (player.position.y > 100 && MilestoneIndexes[0])
     {
       MilestoneIndexes[0] = false;
+      float fIn = 1.5f;
+      float fOut = 0.5f;
       for (int i = 0; i < MilestoneMessage[0].Length; i++)
       {
-        MessagePooler.Instance.QueueMessage(MilestoneMessage[0][i]);
+        MessagePooler.Instance.QueueMessage(new MessagePooler.MessagePiece { message = MilestoneMessage[0][i], fadeIn = fIn, time = 3f, fadeOut = fOut } );
+        fIn = 0.5f;
       }
     }
 	}
@@ -78,9 +83,12 @@ public class RandomMessageManager : MonoBehaviour
     while (TotallyRandomMessage.Length > 0)
     {
       int idx = Random.Range(0, TotallyRandomIndexes.Count);
+      float fIn = 1f;
+      float fOut = 0.25f;
       for (int i = 0; i < TotallyRandomMessage[TotallyRandomIndexes[idx]].Length; i++)
       {
-        MessagePooler.Instance.QueueMessage(TotallyRandomMessage[TotallyRandomIndexes[idx]][i]);
+        MessagePooler.Instance.QueueMessage(new MessagePooler.MessagePiece { message = TotallyRandomMessage[TotallyRandomIndexes[idx]][i], fadeIn = fIn, time = 3f, fadeOut = fOut } );
+        fIn = 0.25f;
       }
       TotallyRandomIndexes.Remove(idx);
 

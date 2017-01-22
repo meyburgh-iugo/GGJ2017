@@ -83,7 +83,7 @@ public class AudioManager
 
     music = audioGO.AddComponent<AudioSource>();
     music.clip = Resources.Load<AudioClip>("AudioClips/bubbles_clip");
-    music.volume = 0.5f;
+    music.volume = 0.8f;
     music.loop = true;
 
     StartMusic();
@@ -120,7 +120,7 @@ public class AudioManager
       music.Play();
   }
 
-  public void Register(Clips clip)
+  public void Register(Clips clip, float volume)
   {
     if (!audioActived)
       return;
@@ -130,6 +130,7 @@ public class AudioManager
     {
       if (!queue.Contains(obj))
       {
+        obj.volume = volume;
         queue.Enqueue(obj);
       }
     }

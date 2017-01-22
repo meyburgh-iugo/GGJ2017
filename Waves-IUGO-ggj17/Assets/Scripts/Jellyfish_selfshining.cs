@@ -7,7 +7,6 @@ public class Jellyfish_selfshining : MonoBehaviour
   SpriteRenderer sprite;
   private float alpha = 0.0f;
   private float maxAlpha = 0.15f;
-  private float lifeSpan = 1.0f;
   private Color color;
   private Transform player;
 

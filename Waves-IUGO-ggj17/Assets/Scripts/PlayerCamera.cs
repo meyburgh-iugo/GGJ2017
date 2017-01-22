@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCamera : MonoBehaviour {
   private GameObject player;
   private Rigidbody2D playerBody;
-  private float abyssStart = 100.0f;
+  private float abyssStart = 60.0f;
 
   private float target_z = -10.0f;
 
