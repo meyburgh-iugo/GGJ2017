@@ -11,6 +11,7 @@ public class Trumpfish_behavior : MonoBehaviour
   private Transform Player;
   private Rigidbody2D rb;
   private MessageFade messenger;
+  private Animator anim;
 
   private string[][] speeches;
   private Queue<MessagePooler.MessagePiece> messagesQueue;
@@ -32,6 +33,7 @@ public class Trumpfish_behavior : MonoBehaviour
     rb = GetComponent<Rigidbody2D>();
     Player = GameObject.FindGameObjectWithTag("Player").transform;
     rb.AddForce(new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
+    anim = GetComponent<Animator>();
 
     messenger = GetComponentInChildren<MessageFade>();
     messenger.OnFinishFade += DequeueMessage;
@@ -58,6 +60,8 @@ public class Trumpfish_behavior : MonoBehaviour
     {
       rb.AddForce(new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
     }
+
+    anim.SetFloat("Speed", rb.velocity.magnitude);
   }
 
   public void QueueMessage(MessagePooler.MessagePiece message)
