@@ -7,7 +7,7 @@ public class HideOnStart : MonoBehaviour
   SpriteRenderer sprite;
   private float alpha = 0.0f;
   private float maxAlpha = 0.15f;
-  private float lifeSpan = 1.0f;
+  public static float lifeSpan = 1.0f;
   private Vector3 color = new Vector3(1,1,1);
   private Transform player;
 
