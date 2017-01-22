@@ -10,6 +10,7 @@ public class PhotonSpawner : MonoBehaviour
   public float photonLifeSpan = 1.3f;
   public float photonSpeed = 10.0f;
   public float radius = 0.2f;
+  public float photonDeathDelay = 0;
 
   private Transform t;
 	// Use this for initialization
@@ -26,7 +27,7 @@ public class PhotonSpawner : MonoBehaviour
       var go = Instantiate(photon, new Vector3(t.position.x + radius * Mathf.Cos(i * Mathf.Deg2Rad), t.position.y + radius * Mathf.Sin(i * Mathf.Deg2Rad), t.position.z), Quaternion.identity);
       var dir = go.transform.position - t.position;
       var trace = Random.Range(0.0f, 1.0f) > 0.7f;
-      go.GetComponent<Photon>().Setup(dir, photonLifeSpan, photonSpeed, trace);
+      go.GetComponent<Photon>().Setup(dir, photonLifeSpan, photonSpeed, trace, photonDeathDelay);
     }
   }
 }

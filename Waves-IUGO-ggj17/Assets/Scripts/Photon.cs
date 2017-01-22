@@ -8,6 +8,7 @@ public class Photon : MonoBehaviour
   private Rigidbody2D rb;
   private float lifeSpan;
   private float maxLifeSpan;
+  private float DeathDelay;
 
   public GameObject trace;
 
@@ -32,11 +33,12 @@ public class Photon : MonoBehaviour
     sprite.color = newColor;
   }
 
-  public void Setup(Vector2 dir, float _lifeSpan, float speed, bool _tracer)
+  public void Setup(Vector2 dir, float _lifeSpan, float speed, bool _tracer, float deathDelay = 0)
   {
     lifeSpan = 0;
     maxLifeSpan = _lifeSpan;
     rb.velocity = dir.normalized * speed;
+    DeathDelay = deathDelay;
   }
 
   public void OnCollisionEnter2D(Collision2D collision)
@@ -54,6 +56,6 @@ public class Photon : MonoBehaviour
    
     var position = collision.contacts[0].point + (collision.contacts[0].normal * 0.01f);
     var go = Instantiate(trace, position, Quaternion.identity);
-    go.GetComponent<Trace>().Setup(maxLifeSpan, lifeSpan);
+    go.GetComponent<Trace>().Setup(maxLifeSpan + DeathDelay, lifeSpan);
   } 
 }
