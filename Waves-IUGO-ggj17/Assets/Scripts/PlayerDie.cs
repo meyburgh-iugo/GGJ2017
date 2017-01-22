@@ -13,13 +13,15 @@ public class PlayerDie : MonoBehaviour
   GameObject GameUI;
   Text DeepestText;
   Text DeepText;
+  Text NewRecord;
   // Use this for initialization
   void Start ()
   {
     DeepestText = GameObject.Find("Deepest").GetComponent<Text>();
     DeepestText.text = "Deepest: " + PlayerPrefs.GetInt("Deepest") + "m";
-
     DeepText = GameObject.Find("Deep").GetComponent<Text>();
+    NewRecord = GameObject.Find("NewRecord").GetComponent<Text>();
+    NewRecord.enabled = false;
   }
 
   // Update is called once per frame
@@ -32,6 +34,7 @@ public class PlayerDie : MonoBehaviour
       PlayerPrefs.SetInt("Deepest", (int)transform.position.y);
       DeepestText.text = "Deepest: " + PlayerPrefs.GetInt("Deepest", 0) + "m";
       DeepText.enabled = false;
+      NewRecord.enabled = true;
     }
     else
     {
@@ -100,7 +103,8 @@ public class PlayerDie : MonoBehaviour
 
   public IEnumerator DelayRestart()
   {
-    yield return new WaitForSeconds(3);
+    yield return new WaitForSeconds(2);
+    NewRecord.enabled = false;
     RestartLevel();
   }
 }
