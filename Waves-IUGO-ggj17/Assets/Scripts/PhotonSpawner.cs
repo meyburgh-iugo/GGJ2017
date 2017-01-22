@@ -25,8 +25,8 @@ public class PhotonSpawner : MonoBehaviour
     {
       var go = Instantiate(photon, new Vector3(t.position.x + radius * Mathf.Cos(i * Mathf.Deg2Rad), t.position.y + radius * Mathf.Sin(i * Mathf.Deg2Rad), t.position.z), Quaternion.identity);
       var dir = go.transform.position - t.position;
-      go.GetComponent<Photon>().Setup(dir, photonLifeSpan, photonSpeed);
-
+      var trace = Random.Range(0.0f, 1.0f) > 0.7f;
+      go.GetComponent<Photon>().Setup(dir, photonLifeSpan, photonSpeed, trace);
     }
   }
 }
