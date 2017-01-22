@@ -12,8 +12,6 @@ public class Photon : MonoBehaviour
   private Vector3 color;
   private float maxLifeSpan;
 
-  public bool tracer = false;
-
   private void Awake()
   {
     color = new Vector3(1, 1, 1);
@@ -36,12 +34,11 @@ public class Photon : MonoBehaviour
     }
   }
 
-  public void Setup(Vector2 dir, float _lifeSpan, float speed, bool _tracer)
+  public void Setup(Vector2 dir, float _lifeSpan, float speed)
   {
     lifeSpan = _lifeSpan;
     maxLifeSpan = 3 * lifeSpan;
     rb.velocity = dir.normalized * speed;
-    tracer = _tracer;
     alpha = 1.0f;
   }
 
@@ -51,12 +48,12 @@ public class Photon : MonoBehaviour
     {
       ServiceLocator.GetAudioManager().Register(AudioManager.Clips.SONAR);
     }
-
-    if (tracer)
+    float r = Random.Range(0.0f, 1.0f);
+    if (r > 0.7f)
     {
       color = new Vector3(0, 0.6f, 0);
-      rb.velocity = Vector2.zero; // -collision.relativeVelocity.normalized;
-      rb.position = collision.contacts[0].point + (collision.contacts[0].normal * 0.01f);
+      rb.velocity = Vector2.zero;
+      rb.position = collision.contacts[0].point;
       col.enabled = false;
       lifeSpan = Mathf.Clamp(lifeSpan + collision.relativeVelocity.magnitude, 0, 2);
     }
