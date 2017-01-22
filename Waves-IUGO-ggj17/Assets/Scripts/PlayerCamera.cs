@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour {
   public Transform goal;
+  public float abyssStart = 50.0f;
   private Vector3 offset;
   private Camera cam;
 	// Use this for initialization
@@ -21,7 +22,7 @@ public class PlayerCamera : MonoBehaviour {
     Vector3 pos = new Vector3(Mathf.Lerp (transform.position.x, goal.position.x, 0.5f * Time.deltaTime), Mathf.Lerp (transform.position.y, goal.position.y, 0.5f * Time.deltaTime), transform.position.z);
     transform.position = pos;
 
-    float time = Mathf.Abs(goal.position.y) / 50.0f; 
+    float time = -goal.position.y / abyssStart; 
     cam.backgroundColor = new Color(0, Mathf.Lerp(0.44f, 0.0f, time), Mathf.Lerp(0.50f, 0.0f, time));
 
   }

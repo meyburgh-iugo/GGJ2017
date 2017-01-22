@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+  private Animator anim;
   private Rigidbody2D rb;
   private Transform t;
 	public float speed = 0.2f;
@@ -11,6 +12,7 @@ public class Movement : MonoBehaviour
   // Use this for initialization
 	void Awake ()
   {
+    anim = GetComponent<Animator>();
     t = transform;
     rb = GetComponent<Rigidbody2D>();
     rb.drag = speed * 0.95f;
@@ -23,7 +25,8 @@ public class Movement : MonoBehaviour
     var vert = Input.GetAxis("Vertical");
     var hori = Input.GetAxis("Horizontal");
 
-    rb.rotation += (-hori * Time.deltaTime * turnSpeed);
-    rb.AddRelativeForce (Vector2.right * Time.deltaTime * speed * vert, ForceMode2D.Impulse);
+    anim.SetFloat("Speed", hori);
+
+    rb.AddRelativeForce (new Vector2(hori * Time.deltaTime * speed, Time.deltaTime * speed * vert), ForceMode2D.Impulse);
   }
 }
