@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IncreaseSpeed : PlayerEffect
 {
-  float speedFactor = 1.5f;
+  float speedFactor = 1.75f;
 
   public override void OnStartEffect(GameObject Player)
   {
