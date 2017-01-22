@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCamera : MonoBehaviour {
   private GameObject player;
   private Rigidbody2D playerBody;
+
   private float abyssStart = 60.0f;
 
   private float target_z = -10.0f;
@@ -22,6 +23,26 @@ public class PlayerCamera : MonoBehaviour {
     cam = GetComponent<Camera>();
     cam.transform.position = playerBody.transform.position;
     cam.orthographicSize = initOrtho;
+
+    WaterDistortion effect = cam.GetComponent<WaterDistortion>();
+    switch(ServiceLocator.Difficulty)
+    {
+      case EDifficulty.Hard:
+        {
+          effect._Distortion *= 2.0f;
+          effect._Waves += 2;
+          abyssStart *= 0.5f;
+          break;
+        }
+      case EDifficulty.Nightmare:
+        {
+          effect._Distortion *= 4.0f;
+          effect._Waves += 5;
+          abyssStart *= 0.25f;
+          break;
+        }
+    }
+
 	}
 	
 	// Update is called once per frame
