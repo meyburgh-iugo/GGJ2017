@@ -6,14 +6,12 @@ public class Movement : MonoBehaviour
 {
   private Animator anim;
   private Rigidbody2D rb;
-  private Transform t;
 	public float speed = 0.2f;
   public float turnSpeed = 10.0f;
   // Use this for initialization
 	void Awake ()
   {
     anim = GetComponent<Animator>();
-    t = transform;
     rb = GetComponent<Rigidbody2D>();
     rb.drag = speed * 0.9f;
 	}
