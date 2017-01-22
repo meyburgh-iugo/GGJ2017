@@ -29,7 +29,7 @@ public class PlayerDie : MonoBehaviour
   {
     isDead = true;
 
-    ServiceLocator.GetAudioManager().Register(AudioManager.Clips.EXPLOSION);
+    ServiceLocator.GetAudioManager().Register(AudioManager.Clips.EXPLOSION, 1);
 
     if (transform.position.y < PlayerPrefs.GetInt("Deepest", 0))
     {

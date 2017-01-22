@@ -120,7 +120,7 @@ public class AudioManager
       music.Play();
   }
 
-  public void Register(Clips clip)
+  public void Register(Clips clip, float volume)
   {
     if (!audioActived)
       return;
@@ -130,6 +130,7 @@ public class AudioManager
     {
       if (!queue.Contains(obj))
       {
+        obj.volume = volume;
         queue.Enqueue(obj);
       }
     }
