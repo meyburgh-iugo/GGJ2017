@@ -38,7 +38,7 @@ public class AngleFishSpawner : MonoBehaviour {
     go.transform.parent = transform;
 
     var body = go.GetComponent<Rigidbody2D> ();
-    body.velocity = 0;
+    body.velocity = new Vector2(0,0);
     body.angularVelocity = 0;
 
     body.drag = 0;
