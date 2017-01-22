@@ -23,11 +23,11 @@ public class MessagePooler : Singleton<MessagePooler>
     {
       case 0: messages[2] = new string[3] { "My wife just dumped me...", "Because I purcharsed that submarine", "She wasn't pretty, though." }; break;
       case 1: messages[2] = new string[2] { "Do you see that whale?", "It remembers my ex wife." }; break;
-      case 3: messages[2] = new string[2] { "I want to be like James Cameron...", "Could I find Titanic down here?" }; break;
+      case 2: messages[2] = new string[2] { "I want to be like James Cameron...", "Could I find the Titanic down here?" }; break;
     }
 
     int deaths = PlayerPrefs.GetInt("StartingText", 0);
-		for (int i = 0; i < messages[deaths].Length; i++)
+    for (int i = 0; i < messages[deaths % messages.Length].Length; i++)
     {
       messagesQueue.Enqueue(messages[deaths][i]);
     }
