@@ -27,7 +27,7 @@ public class MessagePooler : Singleton<MessagePooler>
     }
 
     int deaths = PlayerPrefs.GetInt("StartingText", 0);
-		for (int i = 0; i < messages[deaths].Length; i++)
+    for (int i = 0; i < messages[deaths % messages.Length].Length; i++)
     {
       messagesQueue.Enqueue(messages[deaths][i]);
     }
