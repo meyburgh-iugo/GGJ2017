@@ -50,6 +50,7 @@ public class MessageFade : MonoBehaviour
       fade -= Time.deltaTime;
       yield return new WaitForEndOfFrame();
     }
+    text.color = new Color(c.r, c.g, c.b, 0);
 
     yield return new WaitForSeconds(ShowTime);
     isPlaying = false;
