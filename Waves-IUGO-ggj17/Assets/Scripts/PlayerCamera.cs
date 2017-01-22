@@ -32,7 +32,7 @@ public class PlayerCamera : MonoBehaviour {
     {
       case EDifficulty.Hard:
         {
-          os2.fieldSize /= 2;
+        os2.additionalObjectsPerLevel *= 2;
           effect._Distortion *= 2.0f;
           effect._Waves += 2;
           abyssStart *= 0.5f;
@@ -40,7 +40,7 @@ public class PlayerCamera : MonoBehaviour {
         }
       case EDifficulty.Nightmare:
         {
-          os2.fieldSize /= 4;
+        os2.additionalObjectsPerLevel *= 4;
           effect._Distortion *= 4.0f;
           effect._Waves += 5;
           abyssStart *= 0.25f;
