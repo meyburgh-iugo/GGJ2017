@@ -14,14 +14,14 @@ public class PlayerEffectSlot : MonoBehaviour
 
   }
 
-  bool Empty()
+  public bool Empty()
   {
     return Effect == null;
   }
 
-  void Fill(PlayerEffect NewEffect)
+  public void Fill(PlayerEffect NewEffect)
   {
-    Assert.IsNull(Effect);
+    Assert.IsNull(Effect, "Player already has effect.");
     Timer = 0.0f;
     Effect = NewEffect;
     Effect.OnStartEffect(this.gameObject);
