@@ -55,13 +55,15 @@ public class Trumpfish_behavior : MonoBehaviour
       }
       rb.velocity = Vector2.zero;
       rb.AddForce(-dir.normalized * speed, ForceMode2D.Impulse);
+      anim.SetFloat("Speed", rb.velocity.x);
     }
     else if (rb.velocity.magnitude < 0.1)
     {
       rb.AddForce(new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
+      anim.SetFloat("Speed", rb.velocity.x);
     }
 
-    anim.SetFloat("Speed", rb.velocity.magnitude);
+    
   }
 
   public void QueueMessage(MessagePooler.MessagePiece message)

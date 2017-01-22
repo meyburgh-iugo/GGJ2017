@@ -65,4 +65,9 @@ public class PlayerCamera : MonoBehaviour {
     float time = -playerBody.position.y / abyssStart; 
     cam.backgroundColor = new Color(0, Mathf.Lerp(0.44f, 0.0f, time), Mathf.Lerp(0.50f, 0.0f, time));
   }
+
+  public float GetAbyssStart()
+  {
+    return abyssStart;
+  }
 }

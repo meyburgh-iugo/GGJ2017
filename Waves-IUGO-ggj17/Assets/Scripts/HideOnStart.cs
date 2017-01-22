@@ -10,14 +10,18 @@ public class HideOnStart : MonoBehaviour
   public static float lifeSpan = 1.0f;
   private Vector3 color = new Vector3(1,1,1);
   private Transform player;
+  private float abyssStart = 80.0f;
 
-	// Use this for initialization
-	void Start ()
+  // Use this for initialization
+  void Start ()
   {
     player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     sprite = GetComponent<SpriteRenderer>();
     sprite.color = new Color (color.x, color.y, color.z, alpha);
-	}
+
+    abyssStart = Camera.main.GetComponent<PlayerCamera>().GetAbyssStart();
+
+  }
 
   public void OnCollisionEnter2D(Collision2D collision)
   {
@@ -28,7 +32,7 @@ public class HideOnStart : MonoBehaviour
 
   private void Update()
   {
-    float deepAlpha = Mathf.Lerp(0.4f, 0.0f, Mathf.Abs(player.position.y) / 80.0f);
+    float deepAlpha = Mathf.Lerp(0.4f, 0.0f, Mathf.Abs(player.position.y) / abyssStart);
 
     alpha = Mathf.Max(deepAlpha, Mathf.Clamp (alpha - Time.deltaTime * 0.25f / lifeSpan, 0, maxAlpha));
     sprite.color = new Color(color.x, color.y, color.z, alpha);
