@@ -19,9 +19,15 @@ public class Trumpfish_behavior : MonoBehaviour
   void Start()
   {
     messagesQueue = new Queue<MessagePooler.MessagePiece>();
-    speeches = new string[1][];
+    speeches = new string[7][];
 
     speeches[0] = new string[] { "I will build a net all over the sea...", "and make the shrimps pay for it"};
+    speeches[1] = new string[] { "Orange is the new black."};
+    speeches[2] = new string[] { "Make the sea great again!" };
+    speeches[3] = new string[] { "Happy Global Game Jam to all, including to my...", " sleep that have fought me and lost so badly they just don’t know what to do. Love!" };
+    speeches[4] = new string[] { "The beauty of me is that I’m very orange." };
+    speeches[5] = new string[] { "It’s freezing and snowing in Vancouver – we need global warming!" };
+    speeches[6] = new string[] { "You're disgusting!" };
 
     rb = GetComponent<Rigidbody2D>();
     Player = GameObject.FindGameObjectWithTag("Player").transform;
