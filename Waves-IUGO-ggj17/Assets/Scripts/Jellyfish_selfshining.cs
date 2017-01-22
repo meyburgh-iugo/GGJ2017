@@ -8,7 +8,7 @@ public class Jellyfish_selfshining : MonoBehaviour
   private float alpha = 0.0f;
   private float maxAlpha = 0.15f;
   private float lifeSpan = 1.0f;
-  private Vector3 color = new Vector3(1, 1, 1);
+  private Color color;
   private Transform player;
 
   // Use this for initialization
@@ -16,21 +16,22 @@ public class Jellyfish_selfshining : MonoBehaviour
   {
     player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     sprite = GetComponent<SpriteRenderer>();
-    sprite.color = new Color(color.x, color.y, color.z, alpha);
+    color = sprite.color;
+    sprite.color = new Color(color.r, color.g, color.b, alpha);
   }
 
   public void OnCollisionEnter2D(Collision2D collision)
   {
     alpha = Mathf.Clamp((alpha + collision.collider.GetComponent<SpriteRenderer>().color.a) / 2, alpha, maxAlpha);
     sprite = GetComponent<SpriteRenderer>();
-    sprite.color = new Color(color.x, color.y, color.z, alpha);
+    sprite.color = new Color(color.r, color.g, color.b, alpha);
   }
 
   private void Update()
   {
-    float deepAlpha = Mathf.Lerp(0.2f, 0.0f, Mathf.Abs(player.position.y) / 40.0f);
+    float deepAlpha = Mathf.Lerp(0.2f, 0.0f, Mathf.Abs(player.position.y) / 80.0f);
 
     alpha = Mathf.Max(deepAlpha, Mathf.Sin(Time.time)* 0.5f + 0.1f);
-    sprite.color = new Color(color.x, color.y, color.z, alpha);
+    sprite.color = new Color(color.r, color.g, color.b, alpha);
   }
 }
