@@ -29,7 +29,9 @@ public class PlayerDie : MonoBehaviour
   {
     isDead = true;
 
-    if(transform.position.y < PlayerPrefs.GetInt("Deepest", 0))
+    ServiceLocator.GetAudioManager().Register(AudioManager.Clips.EXPLOSION);
+
+    if (transform.position.y < PlayerPrefs.GetInt("Deepest", 0))
     {
       PlayerPrefs.SetInt("Deepest", (int)transform.position.y);
       DeepestText.text = "Deepest: " + PlayerPrefs.GetInt("Deepest", 0) + "m";
@@ -103,7 +105,7 @@ public class PlayerDie : MonoBehaviour
 
   public IEnumerator DelayRestart()
   {
-    yield return new WaitForSeconds(2);
+    yield return new WaitForSeconds(3);
     NewRecord.enabled = false;
     RestartLevel();
   }

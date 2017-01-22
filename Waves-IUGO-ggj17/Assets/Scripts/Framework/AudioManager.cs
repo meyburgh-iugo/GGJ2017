@@ -12,7 +12,8 @@ public class AudioManager
       BUTTONCLICK = 0,
       CORRECTTAP = 1,
       WRONGTAP = 2,
-      SONAR = 3
+      SONAR = 3,
+      EXPLOSION = 4,
   }
 
   class AudioObject
@@ -77,13 +78,15 @@ public class AudioManager
     //clips.Add(Clips.CORRECTTAP, new AudioObject(Resources.Load<AudioClip>("AudioClips/correct_clip"), 1.0f));
     //clips.Add(Clips.WRONGTAP, new AudioObject(Resources.Load<AudioClip>("AudioClips/wrong_clip"), 1.0f));
     clips.Add(Clips.SONAR, new AudioObject(Resources.Load<AudioClip>("AudioClips/sonar_clip"), 1.0f));
+    clips.Add(Clips.EXPLOSION, new AudioObject(Resources.Load<AudioClip>("AudioClips/explosion_clip"), 1.0f));
 
-    //music = audioGO.AddComponent<AudioSource>();
-    //music.clip = Resources.Load<AudioClip>("AudioClips/soundtrack");
-    //music.volume = 0.05f;
-    //music.loop = true;
 
-    //StartMusic();
+    music = audioGO.AddComponent<AudioSource>();
+    music.clip = Resources.Load<AudioClip>("AudioClips/bubbles_clip");
+    music.volume = 0.5f;
+    music.loop = true;
+
+    StartMusic();
   }
 
   public bool AudioActived()
