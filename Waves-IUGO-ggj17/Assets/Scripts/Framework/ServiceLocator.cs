@@ -4,12 +4,20 @@ using UnityEngine.SceneManagement;
 
 using SNS;
 
+public enum EDifficulty
+{
+  Normal,
+  Hard,
+  Nightmare
+}
+
 public class ServiceLocator : Singleton<ServiceLocator>
 {
   static AudioManager sAudioManager;
   static DataManager sDataManager;
   static InputHandler sInputHandler;
   static EventSystem sEventSystem;
+  public static EDifficulty Difficulty;
 
   protected override void Init()
   {
