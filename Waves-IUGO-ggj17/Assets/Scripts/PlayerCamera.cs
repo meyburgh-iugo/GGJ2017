@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour {
-  private Rigidbody2D player;
+  private GameObject player;
+  private Rigidbody2D playerBody;
   private float abyssStart = 100.0f;
 
   private float target_z = -10.0f;
@@ -15,23 +16,27 @@ public class PlayerCamera : MonoBehaviour {
   private Camera cam;
 	// Use this for initialization
 	void Start () {
-    player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-
+    player = GameObject.FindGameObjectWithTag("Player");
+    playerBody = player.GetComponent<Rigidbody2D>();
+    
     cam = GetComponent<Camera>();
-    cam.transform.position = player.transform.position;
+    cam.transform.position = playerBody.transform.position;
     cam.orthographicSize = initOrtho;
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-    Vector3 pos = new Vector3(Mathf.Lerp(transform.position.x, player.position.x, 0.5f * Time.deltaTime), Mathf.Lerp(transform.position.y, player.position.y, Time.deltaTime), target_z);
+    Vector3 pos = new Vector3(Mathf.Lerp(transform.position.x, playerBody.position.x, 0.5f * Time.deltaTime), Mathf.Lerp(transform.position.y, playerBody.position.y, Time.deltaTime), target_z);
     transform.position = pos;
 
-    float targetOrtho = 8 * (1 / (1 + Mathf.Exp(-player.velocity.magnitude + 1.0f)));
-    targetOrtho = Mathf.Clamp(targetOrtho, initOrtho, maxOrtho);
-    cam.orthographicSize = Mathf.MoveTowards (Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
+    bool playerIsDead = player.GetComponent<PlayerDie>().IsDead;
 
-    float time = -player.position.y / abyssStart; 
+    float targetOrtho = playerIsDead ? initOrtho : 8 * (1 / (1 + Mathf.Exp(-playerBody.velocity.magnitude + 1.0f)));
+
+    targetOrtho = Mathf.Clamp(targetOrtho, initOrtho, maxOrtho);
+    cam.orthographicSize = Mathf.MoveTowards (Camera.main.orthographicSize, targetOrtho, (playerIsDead ? 2.25f : 1.0f) * smoothSpeed * Time.deltaTime);
+
+    float time = -playerBody.position.y / abyssStart; 
     cam.backgroundColor = new Color(0, Mathf.Lerp(0.44f, 0.0f, time), Mathf.Lerp(0.50f, 0.0f, time));
   }
 }
