@@ -28,11 +28,10 @@ public class PlayerCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-    
-    Vector3 pos = new Vector3(Mathf.Lerp(transform.position.x, player.position.x, 0.5f * Time.deltaTime), Mathf.Lerp(transform.position.y, player.position.y, 0.8f * Time.deltaTime), target_z);
+    Vector3 pos = new Vector3(Mathf.Lerp(transform.position.x, player.position.x, 0.5f * Time.deltaTime), Mathf.Lerp(transform.position.y, player.position.y, Time.deltaTime), target_z);
     transform.position = pos;
 
-    float targetOrtho = 8 * (1 / (1 + Mathf.Exp(-player.velocity.magnitude + 1.5f)));
+    float targetOrtho = 8 * (1 / (1 + Mathf.Exp(-player.velocity.magnitude + 1.0f)));
     targetOrtho = Mathf.Clamp(targetOrtho, initOrtho, maxOrtho);
     cam.orthographicSize = Mathf.MoveTowards (Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
 
