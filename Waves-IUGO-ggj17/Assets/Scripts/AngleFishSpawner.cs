@@ -7,7 +7,6 @@ public class AngleFishSpawner : MonoBehaviour {
   public GameObject[] primitives;
   private int objectCount = 1;
   private int counter = 0;
-  public Transform player;
   private int maxDistance = 20;
   private List<GameObject> obstacles;
   private float maxSpeed = 0.1f;
