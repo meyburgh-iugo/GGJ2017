@@ -33,7 +33,7 @@ public class RandomMessageManager : MonoBehaviour
     TotallyRandomMessage[11] = new string[] { "You know What?...", "Ahh, nevermind." };
     TotallyRandomMessage[12] = new string[] { "Hey, Georgie...", "Don't you want a balloon?" };
     TotallyRandomMessage[13] = new string[] { "Permission to Speak, Sir!" };
-    TotallyRandomMessage[14] = new string[] { "Perdon me...", "But, are you bored?" };
+    TotallyRandomMessage[14] = new string[] { "Pardon me...", "But, are you bored?" };
     TotallyRandomMessage[15] = new string[] { "Tell me the truth...", "Do you like our game?" };
     TotallyRandomMessage[16] = new string[] { "This game is legen...", " wait for it...", "...dary." };
     TotallyRandomMessage[17] = new string[] { "OH MY GOD! THEY KILLED KENNY! YOU BASTARDS!" };
