@@ -10,7 +10,7 @@ public class PhotonSpawner : MonoBehaviour
   public float fastPhotonRate = 1f;
   public float photonLifeSpan = 1.3f;
   public float photonSpeed = 10.0f;
-  public float radius = 0.2f;
+  private float radius = 0.3f;
 
   private float photonRate;
   private Transform t;
