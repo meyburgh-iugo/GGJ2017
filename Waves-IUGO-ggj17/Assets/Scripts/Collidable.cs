@@ -26,15 +26,14 @@ public class Collidable : MonoBehaviour
       {
           if (collision.gameObject.CompareTag("Player") && !collision.gameObject.GetComponent<PlayerDie>().IsDead)
           {
-            StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die(PlayerPrefs.GetInt("StartingText",1) < 2 ? 0 : 2));
-          }
-          break;
-      }
-      case Kind.light:
-      {
-          if (collision.gameObject.CompareTag("Player") && !collision.gameObject.GetComponent<PlayerDie>().IsDead)
-          {
-            StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die(1));
+            var is_anglerfish = GetComponent<Anglerfish_Behavior>();
+            int death_kind = 0;
+            if (is_anglerfish != null)
+            {
+              death_kind = 1;
+            }
+
+            StartCoroutine(collision.gameObject.GetComponent<PlayerDie>().Die(death_kind));
           }
           break;
       }

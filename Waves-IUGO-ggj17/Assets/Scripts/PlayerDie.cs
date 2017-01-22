@@ -45,45 +45,54 @@ public class PlayerDie : MonoBehaviour
 
     GetComponent<Movement>().enabled = false;
 
-    if (PlayerPrefs.GetInt("Lives", 0) == -10)
-    {
-      MessagePooler.Instance.QueueMessage("You are doing great!");
-      yield return new WaitForSeconds(8.0f);
-    }
-
     yield return new WaitForSeconds(1.0f);
 
     switch (deathKind)
     {
-      case 0:
-        MessagePooler.Instance.QueueMessage("Oops, you died.");
-        PlayerPrefs.SetInt("StartingText", 1);
-        break;
       case 1:
-        MessagePooler.Instance.QueueMessage("Died again. Even the light was not safe, heh?");
-        PlayerPrefs.SetInt("StartingText", 2);
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+          MessagePooler.Instance.QueueMessage("Even the light was not safe, heh?");
+        }
+        else
+        {
+          MessagePooler.Instance.QueueMessage("Your greedy pitty. I died!");
+        }
         break;
       default:
         if (Random.Range(0.0f, 1.0f) < 0.5f)
         {
           if (Random.Range(0.0f, 1.0f) < 0.5f)
           {
+            MessagePooler.Instance.QueueMessage("Oops, I died.");
+          }
+          else if (Random.Range(0.0f, 1.0f) < 0.5f)
+          {
             MessagePooler.Instance.QueueMessage("Deeper you go, harder it is to go back.");
           }
           else
           {
-            MessagePooler.Instance.QueueMessage("Keep calm, it is all about the journey.");
+            MessagePooler.Instance.QueueMessage("Hey player, thank you for letting me die down here.");
           }
         }
         else
         {
           if (Random.Range(0.0f, 1.0f) < 0.5f)
           {
-            MessagePooler.Instance.QueueMessage("Oh My Gosh! We got a leak.");
+            MessagePooler.Instance.QueueMessage("Oh My Gosh! We got a leak!");
+          }
+          else if (Random.Range(0.0f, 1.0f) < 0.5f)
+          {
+            MessagePooler.Instance.QueueMessage("Try one more time, buddy.");
+          }
+          else if (Random.Range(0.0f, 1.0f) < 0.5f)
+          {
+            MessagePooler.Instance.QueueMessage("It looks like I am dying?...");
+            MessagePooler.Instance.QueueMessage("Nah, I was dead inside long time ago.");
           }
           else
           {
-            MessagePooler.Instance.QueueMessage("Try one more time, buddy.");
+            MessagePooler.Instance.QueueMessage("Go home, you're drunk.");
           }
         }
         

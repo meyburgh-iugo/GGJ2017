@@ -22,7 +22,7 @@ public class MessagePooler : Singleton<MessagePooler>
     switch (Random.Range(0, 4))
     {
       case 0: messages[2] = new string[] { "My wife just dumped me...", "She wasn't pretty, though." }; break;
-      case 1: messages[2] = new string[] { "Do you see that whale?", "It remembers my wife." }; break;
+      case 1: messages[2] = new string[] { "Do you see that whale?", "It reminds me my wife." }; break;
       case 2: messages[2] = new string[] { "I want to be like James Cameron, you know...", "Could I find the Titanic down here?" }; break;
       case 3: messages[2] = new string[] { "And let us do that again...", "Oh schnaps, again?" }; break;
     }
