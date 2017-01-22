@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class StartScreen : MonoBehaviour {
 
   Text Text;
+  Camera CanvasCamera;
   WaterDistortion WaterEffect;
   bool ButtonClicked = false;
   float ExitTimer = 1.0f;
@@ -16,15 +17,19 @@ public class StartScreen : MonoBehaviour {
     Text = transform.FindChild("Score").GetComponent<Text>();
     Text.text = "Deepest: " + PlayerPrefs.GetInt("Deepest") + "m";
 
-    WaterEffect = gameObject.GetComponent<Canvas>().worldCamera.GetComponent<WaterDistortion>();
+    CanvasCamera = gameObject.GetComponent<Canvas>().worldCamera;
+    WaterEffect = CanvasCamera.GetComponent<WaterDistortion>();
   }
 
-  private void Update()
+  void LateUpdate()
   {
     if(ButtonClicked)
     {
       ExitTimer -= Time.deltaTime;
-      WaterEffect._Distortion += 0.5f;
+      //CanvasCamera.transform.Translate(0.0f, 0.0f, -1.0f);
+      WaterEffect._Distortion += 1.0f;
+      //WaterEffect._Waves += 1.0f;
+      WaterEffect._Speed -= 0.5f;
       if (ExitTimer < 0.0f)
       {
         SceneManager.LoadScene("2_Gameplay");
