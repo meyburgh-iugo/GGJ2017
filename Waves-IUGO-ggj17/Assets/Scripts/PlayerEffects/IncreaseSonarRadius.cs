@@ -4,29 +4,17 @@ using UnityEngine;
 
 public class IncreaseSonarRadius : PlayerEffect
 {
-  private float radiusIncrease = 2.0f; 
-
-	// Use this for initialization
-	void Start ()
-  {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-  {
-		
-	}
+  private float RadiusIncrease = 2.0f; 
 
   public override void OnStartEffect(GameObject Player)
   {
     PhotonSpawner ps = Player.GetComponent<PhotonSpawner>();
-    ps.photonLifeSpan += radiusIncrease / ps.photonSpeed;
+    ps.photonLifeSpan += RadiusIncrease / ps.photonSpeed;
   }
 
   public override void OnStopEffect(GameObject Player)
   {
     PhotonSpawner ps = Player.GetComponent<PhotonSpawner>();
-    ps.photonLifeSpan -= radiusIncrease / ps.photonSpeed;
+    ps.photonLifeSpan -= RadiusIncrease / ps.photonSpeed;
   }
 }

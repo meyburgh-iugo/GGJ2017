@@ -13,14 +13,15 @@ public class PickUpSpawner : MonoBehaviour
 
   private System.Type[] PlayerEffects;
 
-  private float SpawnIntervalTime = 20.0f;
+  private float SpawnIntervalTime = 10.0f;
   private float Timer = 0.0f;
 
   // Use this for initialization
   void Start ()
   {
-    PlayerEffects = new System.Type[1];
+    PlayerEffects = new System.Type[2];
     PlayerEffects[0] = typeof(IncreaseSonarRadius);
+    PlayerEffects[1] = typeof(IncreaseSpeed);
 
     Assert.IsTrue(PlayerEffects.Length > 0, "No player effects in pickup spawner!");
     foreach(System.Type type in PlayerEffects)

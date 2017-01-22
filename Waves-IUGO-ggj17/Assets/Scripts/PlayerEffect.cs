@@ -6,18 +6,6 @@ public abstract class PlayerEffect
 {
   public float Duration = 0.0f;
 
-  // Use this for initialization
-  void Start()
-  {
-
-  }
-
-  // Update is called once per frame
-  void Update()
-  {
-
-  }
-
   public abstract void OnStartEffect(GameObject Player);
   public abstract void OnStopEffect(GameObject Player);
 }
