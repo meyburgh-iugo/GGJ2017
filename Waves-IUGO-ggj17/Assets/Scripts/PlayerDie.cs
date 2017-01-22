@@ -18,6 +18,9 @@ public class PlayerDie : MonoBehaviour
 	public IEnumerator Die (int deathKind)
   {
     isDead = true;
+
+    PlayerPrefs.SetInt("DepthScore", (int)Mathf.Min(PlayerPrefs.GetInt("DepthScore", 0) , transform.position.y));
+
     PlayerPrefs.SetInt("Lives", PlayerPrefs.GetInt("Lives", 0) - 1);
     GetComponent<Movement>().enabled = false;
 
