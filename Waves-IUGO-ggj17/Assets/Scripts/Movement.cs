@@ -20,6 +20,13 @@ public class Movement : MonoBehaviour
 	void FixedUpdate ()
   {
     var vert = Input.GetAxis("Vertical");
+
+    // don't let the player go 'above' water level
+    if (rb.position.y > 0.1)
+    {
+      vert = -Mathf.Abs(vert);
+    }
+
     var hori = Input.GetAxis("Horizontal");
 
     anim.SetFloat("Speed", hori);
