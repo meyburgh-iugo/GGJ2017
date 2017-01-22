@@ -47,6 +47,7 @@ public class PickUpSpawner : MonoBehaviour
       
       GameObject newPickup = Instantiate(PickUpPrefab, spawnPosition, Quaternion.identity);
       newPickup.GetComponent<PickUp>().SetEffect(pickUpEffect);
+      newPickup.GetComponent<SpriteRenderer>().color = pickUpEffect.PickUpTint();
 
       Timer = SpawnIntervalTime;
     }

@@ -6,6 +6,11 @@ public class IncreaseSpeed : PlayerEffect
 {
   float speedFactor = 1.75f;
 
+  public override Color PickUpTint()
+  {
+    return Color.yellow;
+  }
+
   public override void OnStartEffect(GameObject Player)
   {
     Duration = 3.0f;
