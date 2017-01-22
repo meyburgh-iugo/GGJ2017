@@ -9,10 +9,12 @@ public class HideOnStart : MonoBehaviour
   private float maxAlpha = 0.15f;
   private float lifeSpan = 1.0f;
   private Vector3 color = new Vector3(1,1,1);
+  private Transform player;
 
 	// Use this for initialization
 	void Start ()
   {
+    player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     sprite = GetComponent<SpriteRenderer>();
     sprite.color = new Color (color.x, color.y, color.z, alpha);
 	}
@@ -26,7 +28,9 @@ public class HideOnStart : MonoBehaviour
 
   private void Update()
   {
-    alpha = Mathf.Clamp (alpha - Time.deltaTime * 1.0f / lifeSpan, 0, maxAlpha);
+    float deepAlpha = Mathf.Lerp(0.2f, 0.0f, Mathf.Abs(player.position.y) / 40.0f);
+
+    alpha = Mathf.Max(deepAlpha, Mathf.Clamp (alpha - Time.deltaTime * 1.0f / lifeSpan, 0, maxAlpha));
     sprite.color = new Color(color.x, color.y, color.z, alpha);
   }
 }

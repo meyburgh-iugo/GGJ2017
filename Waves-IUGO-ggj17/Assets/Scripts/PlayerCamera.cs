@@ -21,7 +21,8 @@ public class PlayerCamera : MonoBehaviour {
     Vector3 pos = new Vector3(Mathf.Lerp (transform.position.x, goal.position.x, 0.5f * Time.deltaTime), Mathf.Lerp (transform.position.y, goal.position.y, 0.5f * Time.deltaTime), transform.position.z);
     transform.position = pos;
 
-    cam.backgroundColor = new Color(0, 0, 0);
+    float time = Mathf.Abs(goal.position.y) / 50.0f; 
+    cam.backgroundColor = new Color(0, Mathf.Lerp(0.44f, 0.0f, time), Mathf.Lerp(0.50f, 0.0f, time));
 
   }
 }
