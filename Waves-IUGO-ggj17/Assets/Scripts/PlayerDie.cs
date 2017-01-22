@@ -16,7 +16,7 @@ public class PlayerDie : MonoBehaviour
   // Use this for initialization
   void Start ()
   {
-    GameOverDisplay = GameObject.Find("GameOver");
+    GameOverDisplay = GameObject.Find("GameOverDisplay");
     GameOverDisplay.SetActive(false);
 
     BestScoreText = GameOverDisplay.transform.FindChild("BestScoreText").GetComponent<Text>();
