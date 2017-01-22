@@ -23,9 +23,9 @@ public class Jellyfish_boss : MonoBehaviour
 		if (player.position.y <= -66.6 && !casted)
     {
       casted = true;
-      MessagePooler.Instance.QueueMessage("Wait a minute...");
-      MessagePooler.Instance.QueueMessage("Those jellyfishes got 20% more glow and are red?!");
-      MessagePooler.Instance.QueueMessage("Bad things are coming...");
+      MessagePooler.Instance.QueueMessage(new MessagePooler.MessagePiece { message = "Wait a minute...", fadeIn = 0.5f, time = 1f, fadeOut = 0.5f });
+      MessagePooler.Instance.QueueMessage(new MessagePooler.MessagePiece { message = "Those jellyfishes got 20% more glow and are red?!", fadeIn = 0.5f, time = 1f, fadeOut = 0.5f });
+      MessagePooler.Instance.QueueMessage(new MessagePooler.MessagePiece { message = "Run, Forest, RUN!", fadeIn = 0.5f, time = 1f, fadeOut = 0.5f });
 
       for (int i = 0; i < 4; i++)
       {

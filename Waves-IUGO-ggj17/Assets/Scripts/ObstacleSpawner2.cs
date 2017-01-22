@@ -26,7 +26,7 @@ public class ObstacleSpawner2 : MonoBehaviour {
   private float maxSpeed = 0.1f;
   private float maxSpin = 0.5f;
   private float minScale = 1;
-  private float maxScale = 10;
+  private float maxScale = 5;
 
   // Use this for initialization
   void Start ()

@@ -18,7 +18,7 @@ public class PlayerDie : MonoBehaviour
   void Start ()
   {
     DeepestText = GameObject.Find("Deepest").GetComponent<Text>();
-    DeepestText.text = "Deepest: " + PlayerPrefs.GetInt("Deepest") + "m";
+    DeepestText.text = (PlayerPrefs.GetInt("Deepest")).ToString();
     DeepText = GameObject.Find("Deep").GetComponent<Text>();
     NewRecord = GameObject.Find("NewRecord").GetComponent<Text>();
     NewRecord.enabled = false;
@@ -33,7 +33,7 @@ public class PlayerDie : MonoBehaviour
 
     if (transform.position.y < PlayerPrefs.GetInt("Deepest", 0))
     {
-      PlayerPrefs.SetInt("Deepest", (int)transform.position.y);
+      PlayerPrefs.SetInt("Deepest", (int)-transform.position.y);
       DeepestText.text = "Deepest: " + PlayerPrefs.GetInt("Deepest", 0) + "m";
       DeepText.enabled = false;
       NewRecord.enabled = true;
@@ -47,16 +47,18 @@ public class PlayerDie : MonoBehaviour
 
     yield return new WaitForSeconds(1.0f);
 
+    float fIn = 0.5f;
+    float fOut = 3.0f;
     switch (deathKind)
     {
       case 1:
         if (Random.Range(0.0f, 1.0f) < 0.5f)
         {
-          MessagePooler.Instance.QueueMessage("Even the light was not safe, heh?");
+          MessagePooler.Instance.ClearAndQueueMessage(new MessagePooler.MessagePiece { message = "Even the light was not safe, heh?", fadeIn = fIn, time = 3f, fadeOut = fOut });
         }
         else
         {
-          MessagePooler.Instance.QueueMessage("Your greedy pitty. I died!");
+          MessagePooler.Instance.ClearAndQueueMessage(new MessagePooler.MessagePiece { message = "Your greedy pitty. I died!", fadeIn = fIn, time = 2f, fadeOut = fOut });
         }
         break;
       default:
@@ -64,35 +66,35 @@ public class PlayerDie : MonoBehaviour
         {
           if (Random.Range(0.0f, 1.0f) < 0.5f)
           {
-            MessagePooler.Instance.QueueMessage("Oops, I died.");
+            MessagePooler.Instance.ClearAndQueueMessage(new MessagePooler.MessagePiece { message = "Oops, I died.", fadeIn = fIn, time = 2f, fadeOut = fOut });
           }
           else if (Random.Range(0.0f, 1.0f) < 0.5f)
           {
-            MessagePooler.Instance.QueueMessage("Deeper you go, harder it is to go back.");
+            MessagePooler.Instance.ClearAndQueueMessage(new MessagePooler.MessagePiece { message = "Deeper you go, harder it is to go back.", fadeIn = fIn, time = 2f, fadeOut = fOut });
           }
           else
           {
-            MessagePooler.Instance.QueueMessage("Hey player, thank you for letting me die down here.");
+            MessagePooler.Instance.ClearAndQueueMessage(new MessagePooler.MessagePiece { message = "Hey player, thank you for letting me die down here.", fadeIn = fIn, time = 2f, fadeOut = fOut });
           }
         }
         else
         {
           if (Random.Range(0.0f, 1.0f) < 0.5f)
           {
-            MessagePooler.Instance.QueueMessage("Oh My Gosh! We got a leak!");
+            MessagePooler.Instance.ClearAndQueueMessage(new MessagePooler.MessagePiece { message = "Oh My Gosh! We got a leak!", fadeIn = fIn, time = 3f, fadeOut = fOut });
           }
           else if (Random.Range(0.0f, 1.0f) < 0.5f)
           {
-            MessagePooler.Instance.QueueMessage("Try one more time, buddy.");
+            MessagePooler.Instance.ClearAndQueueMessage(new MessagePooler.MessagePiece { message = "Try one more time, buddy.", fadeIn = fIn, time = 3f, fadeOut = fOut });
           }
           else if (Random.Range(0.0f, 1.0f) < 0.5f)
           {
-            MessagePooler.Instance.QueueMessage("It looks like I am dying?...");
-            MessagePooler.Instance.QueueMessage("Nah, I was dead inside long time ago.");
+            MessagePooler.Instance.ClearAndQueueMessage(new MessagePooler.MessagePiece { message = "It looks like I am dying?...", fadeIn = fIn, time = 3f, fadeOut = fOut });
+            MessagePooler.Instance.ClearAndQueueMessage(new MessagePooler.MessagePiece { message = "Nah, I was dead inside long time ago.", fadeIn = fIn, time = 3f, fadeOut = fOut });
           }
           else
           {
-            MessagePooler.Instance.QueueMessage("Go home, you're drunk.");
+            MessagePooler.Instance.ClearAndQueueMessage(new MessagePooler.MessagePiece { message = "Go home, you're drunk.", fadeIn = fIn, time = 3f, fadeOut = fOut });
           }
         }
         

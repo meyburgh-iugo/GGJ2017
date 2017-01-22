@@ -7,12 +7,10 @@ using UnityEngine.UI;
 public class MessageFade : MonoBehaviour
 {
   public event Action OnFinishFade;
-  public float FadeInTime;
-  public float ShowTime;
-  public float FadeOutTime;
+  private float ShowTime = 1f;
   public Text text;
 
-  private string message;
+  private MessagePooler.MessagePiece message;
   private bool isPlaying = false;
   public bool IsPlaying { get { return isPlaying;  } }
 
@@ -22,7 +20,7 @@ public class MessageFade : MonoBehaviour
     text.color = new Color(c.r, c.g, c.b, 0);
   }
 
-  public void ShowMessage(string _message)
+  public void ShowMessage(MessagePooler.MessagePiece _message)
   {
     message = _message;
     StartCoroutine(FadeIn());
@@ -31,22 +29,22 @@ public class MessageFade : MonoBehaviour
   IEnumerator FadeIn()
   {
     isPlaying = true;
-    text.text = message;
+    text.text = message.message;
     float fade = 0.01f;
     Color c = text.color;
-    while (fade <= FadeInTime)
+    while (fade <= message.fadeIn)
     {
-      text.color = new Color(c.r, c.g, c.b, fade / FadeInTime);
+      text.color = new Color(c.r, c.g, c.b, fade / message.fadeIn);
       fade += Time.deltaTime;
       yield return new WaitForEndOfFrame();
     }
 
-    yield return new WaitForSeconds(ShowTime);
+    yield return new WaitForSeconds(message.time);
 
-    fade = FadeOutTime;
+    fade = message.fadeOut;
     while (fade > 0)
     {
-      text.color = new Color(c.r, c.g, c.b, fade / FadeOutTime);
+      text.color = new Color(c.r, c.g, c.b, fade / message.fadeOut);
       fade -= Time.deltaTime;
       yield return new WaitForEndOfFrame();
     }

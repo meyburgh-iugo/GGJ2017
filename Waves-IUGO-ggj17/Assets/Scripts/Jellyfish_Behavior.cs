@@ -7,14 +7,12 @@ public class Jellyfish_Behavior : MonoBehaviour
   public float RadiusOfView = 10;
   public float speed = 5;
 
-  private Transform t;
   private Transform Player;
   private Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start ()
   {
-    t = transform;
     rb = GetComponent<Rigidbody2D>();
     Player = GameObject.FindGameObjectWithTag("Player").transform;
     rb.AddForce(new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
