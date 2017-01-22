@@ -12,6 +12,8 @@ public class ObstacleSpawner : MonoBehaviour {
   private List<GameObject> obstacles;
   private float maxSpeed = 0.1f;
   private float maxSpin = 1;
+  private float minScale = 1;
+  private float maxScale = 10;
 
   // Use this for initialization
   void Start ()
@@ -29,7 +31,7 @@ public class ObstacleSpawner : MonoBehaviour {
   void SpawnerARandomObstacle()
   {
     var go = Instantiate(primitives[Random.Range(0, primitives.Length)], new Vector2(Random.Range(-maxDistance, maxDistance), Random.Range(-maxDistance, maxDistance)), Quaternion.identity);
-    float slc = Random.Range(0.25f, 10);
+    float slc = Random.Range(minScale, maxScale);
     go.transform.localScale = new Vector3(slc, slc, 1);
     go.transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
     go.transform.parent = transform;
