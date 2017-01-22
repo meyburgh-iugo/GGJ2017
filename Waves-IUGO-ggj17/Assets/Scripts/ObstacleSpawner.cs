@@ -31,9 +31,9 @@ public class ObstacleSpawner : MonoBehaviour {
     go.transform.localScale = new Vector3(slc, slc, 1);
     go.transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
     go.transform.parent = transform;
-    Rigidbody2D body = go.AddComponent<Rigidbody2D> ();
+
+    var body = go.GetComponent<Rigidbody2D> ();
     body.AddForce (new Vector2 (Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
-    body.mass = 1000000;
 
     obstacles.Add(go);
   }
@@ -59,7 +59,6 @@ public class ObstacleSpawner : MonoBehaviour {
       obstacles[index].transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
       obstacles[index].transform.parent = transform;
       body.AddForce(new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
-      body.mass = 1000000;
     }
   }
 }
