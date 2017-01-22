@@ -15,13 +15,14 @@ public class IncreaseSonarRadius : PlayerEffect
   {
     PhotonSpawner ps = Player.GetComponent<PhotonSpawner>();
     ps.photonLifeSpan += RadiusIncrease / ps.photonSpeed;
-    HideOnStart.lifeSpan = 3f;
+    ps.IncreasePhotonRate();
+    Duration = 3f;
   }
 
   public override void OnStopEffect(GameObject Player)
   {
     PhotonSpawner ps = Player.GetComponent<PhotonSpawner>();
     ps.photonLifeSpan -= RadiusIncrease / ps.photonSpeed;
-    HideOnStart.lifeSpan = 1f;
+    ps.DecreasePhotonRate();
   }
 }
