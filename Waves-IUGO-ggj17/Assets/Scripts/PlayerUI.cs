@@ -12,7 +12,6 @@ public class PlayerUI : MonoBehaviour
 	void Start ()
   {
     t = transform;
-    lifes.text = "Lives: " + PlayerPrefs.GetInt("Lives", 0);
   }
 
   private void Update()

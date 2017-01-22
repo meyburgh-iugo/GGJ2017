@@ -10,33 +10,38 @@ public class PlayerDie : MonoBehaviour
   public bool IsDead { get { return isDead;  } }
 
 
-  GameObject GameOverDisplay;
   GameObject GameUI;
-  Text BestScoreText;
+  Text DeepestText;
+  Text DeepText;
   // Use this for initialization
   void Start ()
   {
-    GameOverDisplay = GameObject.Find("GameOverDisplay");
-    GameOverDisplay.SetActive(false);
+    DeepestText = GameObject.Find("Deepest").GetComponent<Text>();
+    DeepestText.text = "Deepest: " + PlayerPrefs.GetInt("DepthScore") + "m";
 
-    BestScoreText = GameOverDisplay.transform.FindChild("BestScoreText").GetComponent<Text>();
-
-    GameUI = GameObject.Find("GameUI");
+    DeepText = GameObject.Find("Deep").GetComponent<Text>();
   }
-	
-	// Update is called once per frame
-	public IEnumerator Die (int deathKind)
+
+  // Update is called once per frame
+  public IEnumerator Die (int deathKind)
   {
     isDead = true;
 
-    PlayerPrefs.SetInt("DepthScore", (int)Mathf.Min(PlayerPrefs.GetInt("DepthScore", 0) , transform.position.y));
+    var LastDepth = transform.position.y;
+    if(LastDepth < PlayerPrefs.GetInt("Deepest", 0))
+    {
+      PlayerPrefs.SetInt("Deepest", (int)LastDepth);
+      DeepText.enabled = false;
+    }
+    else
+    {
+      DeepText.enabled = true;
+    }
 
-    PlayerPrefs.SetInt("Lives", PlayerPrefs.GetInt("Lives", 0) - 1);
     GetComponent<Movement>().enabled = false;
 
     if (PlayerPrefs.GetInt("Lives", 0) == -10)
     {
-      MessagePooler.Instance.QueueMessage("Happy -10 lives, it is an impressive milestone.");
       MessagePooler.Instance.QueueMessage("You are doing great!");
       yield return new WaitForSeconds(8.0f);
     }
@@ -85,18 +90,17 @@ public class PlayerDie : MonoBehaviour
 
   void GameOver()
   {
-    BestScoreText.text = "Best Dive: " + PlayerPrefs.GetInt("DepthScore") + "m";
-    //Time.timeScale = 0;
-    GameUI.SetActive(false);
-    GameOverDisplay.SetActive(true);
+    StartCoroutine("DelayRestart");
   }
 
-  public void RestartLevel()
+  void RestartLevel()
   {
-    //Time.timeScale = 1;
-    GameUI.SetActive(true);
     SceneManager.LoadScene("2_Gameplay");
-    GameOverDisplay.SetActive(false);
+  }
 
+  public IEnumerator DelayRestart()
+  {
+    yield return new WaitForSeconds(3);
+    RestartLevel();
   }
 }
