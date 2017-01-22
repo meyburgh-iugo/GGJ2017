@@ -23,7 +23,7 @@ public class ObstacleSpawner2 : MonoBehaviour {
   private int currentX;
   private int currentY;
 
-  private float maxSpeed = 0.1f;
+  private float maxSpeed = 0.5f;
   private float maxSpin = 0.5f;
   private float minScale = 1;
   private float maxScale = 5;
