@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerDie : MonoBehaviour
 {
+
+  public GameObject DeathEffectPrefab;
+
   private bool isDead = false;
   public bool IsDead { get { return isDead;  } }
 
@@ -116,7 +119,12 @@ public class PlayerDie : MonoBehaviour
 
   public IEnumerator DelayRestart()
   {
-    yield return new WaitForSeconds(3);
+    yield return new WaitForSeconds(2);
+    gameObject.GetComponent<SpriteRenderer>().enabled = false;
+    gameObject.GetComponentInChildren<ParticleSystem>().Stop();
+    GameObject expolsionEffect = Instantiate(DeathEffectPrefab, gameObject.transform.position, Quaternion.identity);
+
+    yield return new WaitForSeconds(2);
     NewRecord.enabled = false;
     RestartLevel();
   }
