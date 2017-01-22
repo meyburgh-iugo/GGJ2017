@@ -17,7 +17,7 @@ public class PlayerDie : MonoBehaviour
   void Start ()
   {
     DeepestText = GameObject.Find("Deepest").GetComponent<Text>();
-    DeepestText.text = "Deepest: " + PlayerPrefs.GetInt("DepthScore") + "m";
+    DeepestText.text = "Deepest: " + PlayerPrefs.GetInt("Deepest") + "m";
 
     DeepText = GameObject.Find("Deep").GetComponent<Text>();
   }
@@ -27,10 +27,10 @@ public class PlayerDie : MonoBehaviour
   {
     isDead = true;
 
-    var LastDepth = transform.position.y;
-    if(LastDepth < PlayerPrefs.GetInt("Deepest", 0))
+    if(transform.position.y < PlayerPrefs.GetInt("Deepest", 0))
     {
-      PlayerPrefs.SetInt("Deepest", (int)LastDepth);
+      PlayerPrefs.SetInt("Deepest", (int)transform.position.y);
+      DeepestText.text = "Deepest: " + PlayerPrefs.GetInt("Deepest", 0) + "m";
       DeepText.enabled = false;
     }
     else

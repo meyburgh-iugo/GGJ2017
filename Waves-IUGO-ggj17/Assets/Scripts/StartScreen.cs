@@ -11,7 +11,7 @@ public class StartScreen : MonoBehaviour {
   void Awake()
   {
     Text = transform.FindChild("Score").GetComponent<Text>();
-    Text.text = "Best Dive: " + PlayerPrefs.GetInt("DepthScore") + "m";
+    Text.text = "Deepest: " + PlayerPrefs.GetInt("Deepest") + "m";
   }
 
   public void StartGame()
