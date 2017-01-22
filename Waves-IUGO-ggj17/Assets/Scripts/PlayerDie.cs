@@ -18,7 +18,7 @@ public class PlayerDie : MonoBehaviour
   void Start ()
   {
     DeepestText = GameObject.Find("Deepest").GetComponent<Text>();
-    DeepestText.text = (PlayerPrefs.GetInt("Deepest")).ToString();
+    DeepestText.text = (Mathf.Abs(PlayerPrefs.GetInt("Deepest", 0))).ToString();
     DeepText = GameObject.Find("Deep").GetComponent<Text>();
     NewRecord = GameObject.Find("NewRecord").GetComponent<Text>();
     NewRecord.enabled = false;
@@ -33,8 +33,8 @@ public class PlayerDie : MonoBehaviour
 
     if (transform.position.y < PlayerPrefs.GetInt("Deepest", 0))
     {
-      PlayerPrefs.SetInt("Deepest", (int)-transform.position.y);
-      DeepestText.text = "Deepest: " + PlayerPrefs.GetInt("Deepest", 0) + "m";
+      PlayerPrefs.SetInt("Deepest", (int)transform.position.y);
+      DeepestText.text = (Mathf.Abs(PlayerPrefs.GetInt("Deepest", 0))).ToString();
       DeepText.enabled = false;
       NewRecord.enabled = true;
     }

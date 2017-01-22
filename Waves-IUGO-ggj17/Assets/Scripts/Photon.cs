@@ -46,7 +46,7 @@ public class Photon : MonoBehaviour
       AudioManager audio = ServiceLocator.GetAudioManager (); 
       if (audio != null) 
       {
-        var attenuation = 1 - 1.3f*(lifeSpan / maxLifeSpan);
+        var attenuation = 1 - 1.5f*(lifeSpan / maxLifeSpan);
         audio.Register (AudioManager.Clips.SONAR, attenuation); 
       }
 
