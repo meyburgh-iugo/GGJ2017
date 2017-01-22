@@ -5,16 +5,16 @@ using UnityEngine;
 public class ObstacleSpawner : MonoBehaviour {
 
   public GameObject[] primitives;
-  public int objectCount = 50;
+  private int objectCount = 60;
   private int counter = 0;
   public Transform player;
-  private int maxDistance = 30;
+  private int maxDistance = 20;
   private List<GameObject> obstacles;
-  public float maxSpeed = 1;
-  public float maxSpin = 1;
+  private float maxSpeed = 0.1f;
+  private float maxSpin = 1;
 
-	// Use this for initialization
-	void Start ()
+  // Use this for initialization
+  void Start ()
   {
     obstacles = new List<GameObject>();
 
@@ -24,7 +24,7 @@ public class ObstacleSpawner : MonoBehaviour {
     }
 
     InvokeRepeating ("SpawnerARandomObstacle", 1.0f, 5.0f);
-	}
+  }
 	
   void SpawnerARandomObstacle()
   {
