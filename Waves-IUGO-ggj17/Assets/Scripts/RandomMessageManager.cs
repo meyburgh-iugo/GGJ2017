@@ -17,7 +17,7 @@ public class RandomMessageManager : MonoBehaviour
   {
     player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
-    TotallyRandomMessage = new string[28][];
+    TotallyRandomMessage = new string[29][];
 
     TotallyRandomMessage[0] = new string[] { "Well, isn't this a fine kettle of fish?!" };
     TotallyRandomMessage[1] = new string[] { "Donkey Kong is not even a donkey." };
@@ -47,8 +47,9 @@ public class RandomMessageManager : MonoBehaviour
     TotallyRandomMessage[25] = new string[] { "Yoh, mah player, keep it random." };
     TotallyRandomMessage[26] = new string[] { "The bar needs to be raised!...", "No one appreciates what I'm trying to do!" };
     TotallyRandomMessage[27] = new string[] { "Do you like fish sticks?"};
+    TotallyRandomMessage[28] = new string[] { "Check that barrels!" };
 
-    TotallyRandomIndexes = new List<int>() {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27};
+    TotallyRandomIndexes = new List<int>() {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28};
 
     MilestoneMessage = new string[1][];
     MilestoneMessage[0] = new string[] { "Yo, player. You should be going down...", "There is nothing up here, just painful death" };
