@@ -2,17 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerDie : MonoBehaviour
 {
   private bool isDead = false;
   public bool IsDead { get { return isDead;  } }
 
-	// Use this for initialization
-	void Start ()
+
+  GameObject GameOverDisplay;
+  GameObject GameUI;
+  Text BestScoreText;
+  // Use this for initialization
+  void Start ()
   {
-		
-	}
+    GameOverDisplay = GameObject.Find("GameOverDisplay");
+    GameOverDisplay.SetActive(false);
+
+    BestScoreText = GameOverDisplay.transform.FindChild("BestScoreText").GetComponent<Text>();
+
+    GameUI = GameObject.Find("GameUI");
+  }
 	
 	// Update is called once per frame
 	public IEnumerator Die (int deathKind)
@@ -70,11 +80,23 @@ public class PlayerDie : MonoBehaviour
         break;
     }
 
-    MessagePooler.Instance.Fade.OnFinishFade += RestartLevel;
+    MessagePooler.Instance.Fade.OnFinishFade += GameOver;
 	}
 
-  void RestartLevel()
+  void GameOver()
   {
+    BestScoreText.text = "Best Dive: " + PlayerPrefs.GetInt("DepthScore") + "m";
+    //Time.timeScale = 0;
+    GameUI.SetActive(false);
+    GameOverDisplay.SetActive(true);
+  }
+
+  public void RestartLevel()
+  {
+    //Time.timeScale = 1;
+    GameUI.SetActive(true);
     SceneManager.LoadScene("2_Gameplay");
+    GameOverDisplay.SetActive(false);
+
   }
 }
