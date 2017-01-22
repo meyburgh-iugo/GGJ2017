@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class PickUp : MonoBehaviour
 {
-  public PlayerEffect Effect;
+  private PlayerEffect Effect;
 
   // Use this for initialization
   void Start()
@@ -19,14 +19,21 @@ public class PickUp : MonoBehaviour
 
   }
 
+  public void SetEffect(PlayerEffect Effect)
+  {
+
+  }
+
   public void OnCollisionEnter2D(Collision2D collision)
   {
     if (collision.gameObject.CompareTag("Player") && !collision.gameObject.GetComponent<PlayerDie>().IsDead)
     {
-      PlayerEffectSlot slot = GetComponentInParent<PlayerEffectSlot>() as PlayerEffectSlot;
+      PlayerEffectSlot slot = GetComponentInParent<PlayerEffectSlot>();
       if(slot.Empty())
       {
         slot.Fill(Effect);
+        Destroy(gameObject);
+        return;
       }
     }
   }
