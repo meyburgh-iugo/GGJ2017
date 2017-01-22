@@ -1,58 +1,51 @@
-﻿Shader "Custom/WaterDistortionShader" {
-
+﻿Shader "IUGOGGJ17/WaterDistortion" {
 	Properties{
-		_MyTexture("My Texture", 2D) = "white" { }
-	// other properties like colors or vectors go here as well
+		_MainTex("Base (RGB)", 2D) = "white" {}
 	}
-
-
 
 		SubShader{
-
-		// Grab the screen behind the object into _BackgroundTexture
-		GrabPass
-	{
-		"_BackgroundTexture"
-	}
-
 		Pass{
-		// ... the usual pass state setup ...
+		ZTest Always Cull Off ZWrite Off
 
 		CGPROGRAM
-// Upgrade NOTE: excluded shader from DX11; has structs without semantics (struct v2f members grabPos)
-#pragma exclude_renderers d3d11
-		// compilation directives for this snippet, e.g.:
 #pragma vertex vert
 #pragma fragment frag
 #include "UnityCG.cginc"
 
-		struct v2f
-	{
-		float4 grabPos ;
+	uniform sampler2D _MainTex;
+	uniform float4 _MainTex_TexelSize;
+	half4 _MainTex_ST;
+	uniform float _Speed;
+	uniform float _Distortion;
+	uniform float _Waves;
+
+	struct v2f {
 		float4 pos : SV_POSITION;
+		float2 uv : TEXCOORD0;
 	};
 
-	float2 vert(appdata_base v) : TEXCOORD0 {
+	v2f vert(appdata_img v)
+	{
 		v2f o;
-
-		o.pos = UnityObjectToClipPos(v.vertex);
-
-		o.grabPos = ComputeGrabScreenPos(o.pos);
+		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.uv = v.texcoord;
 		return o;
 	}
 
-	sampler2D _BackgroundTexture;
-
 	float4 frag(v2f i) : SV_Target
 	{
-		//just add u offset, should calculate sine
-		return tex2D(_BackgroundTexture, i.grabPos + float(i.y, 0));
-		//return 1 - bgcolor;
+		float2 offset = i.uv;
+
+		float norm_sintime = sin(_Time.w * _Speed + offset.y * _Distortion) / 2 + 0.5f;
+		offset.x += norm_sintime * (1.0f/_Waves);
+
+		return tex2D(_MainTex, UnityStereoScreenSpaceUVAdjust(offset, _MainTex_ST));
 	}
 		ENDCG
-		// ... the rest of pass setup ...
-	}
-
 
 	}
+	}
+
+		Fallback off
+
 }
