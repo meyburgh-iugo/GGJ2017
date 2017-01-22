@@ -16,7 +16,7 @@ public class PlayerUI : MonoBehaviour
 
   private void Update()
   {
-    deep.text = "Deep: " + t.position.y.ToString("F1") + " m";
+    deep.text = (-t.position.y).ToString("F1");
   }
   
 }
