@@ -6,7 +6,6 @@ public class Photon : MonoBehaviour
 {
   private SpriteRenderer sprite;
   private Rigidbody2D rb;
-  private CircleCollider2D col;
   private float lifeSpan;
   private float maxLifeSpan;
 
@@ -16,7 +15,6 @@ public class Photon : MonoBehaviour
   {
     sprite = GetComponent<SpriteRenderer>();
     rb = GetComponent<Rigidbody2D>();
-    col = GetComponent<CircleCollider2D> ();
   }
 
   private void Update()
