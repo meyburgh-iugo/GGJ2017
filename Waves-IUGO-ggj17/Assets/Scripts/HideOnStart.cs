@@ -28,7 +28,7 @@ public class HideOnStart : MonoBehaviour
 
   private void Update()
   {
-    float deepAlpha = Mathf.Lerp(0.2f, 0.0f, Mathf.Abs(player.position.y) / 80.0f);
+    float deepAlpha = Mathf.Lerp(0.4f, 0.0f, Mathf.Abs(player.position.y) / 80.0f);
 
     alpha = Mathf.Max(deepAlpha, Mathf.Clamp (alpha - Time.deltaTime * 0.25f / lifeSpan, 0, maxAlpha));
     sprite.color = new Color(color.x, color.y, color.z, alpha);
