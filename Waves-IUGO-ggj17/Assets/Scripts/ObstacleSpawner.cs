@@ -11,7 +11,7 @@ public class ObstacleSpawner : MonoBehaviour {
   private int maxDistance = 20;
   private List<GameObject> obstacles;
   private float maxSpeed = 0.1f;
-  private float maxSpin = 1;
+  private float maxSpin = 0.5f;
   private float minScale = 1;
   private float maxScale = 10;
 
