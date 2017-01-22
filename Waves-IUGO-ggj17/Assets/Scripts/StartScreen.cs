@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class StartScreen : MonoBehaviour {
 
-  public Text Text;
+  Text Text;
 
   void Awake()
   {
+    Text = transform.FindChild("Score").GetComponent<Text>();
     Text.text = "Best Dive: " + PlayerPrefs.GetInt("DepthScore") + "m";
   }
 
