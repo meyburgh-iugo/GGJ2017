@@ -25,7 +25,7 @@ public class PlayerCamera : MonoBehaviour {
     cam.orthographicSize = initOrtho;
 
     WaterDistortion effect = cam.GetComponent<WaterDistortion>();
-    GameObject level = GameObject.Find("level");
+    GameObject level = GameObject.Find("Level");
     ObstacleSpawner2 os2 = level.GetComponent<ObstacleSpawner2>();
 
     switch(ServiceLocator.Difficulty)

@@ -120,10 +120,13 @@ public class PlayerDie : MonoBehaviour
   public IEnumerator DelayRestart()
   {
     yield return new WaitForSeconds(2);
-    gameObject.GetComponent<SpriteRenderer>().enabled = false;
-    gameObject.GetComponentInChildren<ParticleSystem>().Stop();
-    GameObject expolsionEffect = Instantiate(DeathEffectPrefab, gameObject.transform.position, Quaternion.identity);
-
+    if(Random.value < 0.333)
+    {
+      gameObject.GetComponent<SpriteRenderer>().enabled = false;
+      gameObject.GetComponentInChildren<ParticleSystem>().Stop();
+      GameObject expolsionEffect = Instantiate(DeathEffectPrefab, gameObject.transform.position, Quaternion.identity);
+    }
+   
     yield return new WaitForSeconds(2);
     NewRecord.enabled = false;
     RestartLevel();
