@@ -117,12 +117,24 @@ public class PlayerDie : MonoBehaviour
     SceneManager.LoadScene("2_Gameplay");
   }
 
+  private bool explode = false;
+  public void FrontDeathAnimation()
+  {
+    explode = true;
+  }
+
   public IEnumerator DelayRestart()
   {
+    GetComponent<Animator>().SetTrigger("Death");
+
     yield return new WaitForSeconds(2);
-    gameObject.GetComponent<SpriteRenderer>().enabled = false;
-    gameObject.GetComponentInChildren<ParticleSystem>().Stop();
-    GameObject expolsionEffect = Instantiate(DeathEffectPrefab, gameObject.transform.position, Quaternion.identity);
+
+    if (explode)
+    {
+      gameObject.GetComponent<SpriteRenderer>().enabled = false;
+      gameObject.GetComponentInChildren<ParticleSystem>().Stop();
+      GameObject expolsionEffect = Instantiate(DeathEffectPrefab, gameObject.transform.position, Quaternion.identity);
+    }
 
     yield return new WaitForSeconds(2);
     NewRecord.enabled = false;
