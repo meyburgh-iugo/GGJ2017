@@ -10,6 +10,8 @@ public class ObstacleSpawner : MonoBehaviour {
   public Transform player;
   private int maxDistance = 30;
   private List<GameObject> obstacles;
+  public float maxSpeed = 1;
+  public float maxSpin = 1;
 
 	// Use this for initialization
 	void Start ()
@@ -33,8 +35,11 @@ public class ObstacleSpawner : MonoBehaviour {
     go.transform.parent = transform;
 
     var body = go.GetComponent<Rigidbody2D> ();
-    body.AddForce (new Vector2 (Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
+    body.velocity = new Vector2(Random.Range(-maxSpeed, maxSpeed), Random.Range(-maxSpeed, maxSpeed));
+    body.angularVelocity = Random.Range(-maxSpin, maxSpin);
 
+    body.drag = 0;
+    body.angularDrag = 0;
     obstacles.Add(go);
   }
 
@@ -45,8 +50,6 @@ public class ObstacleSpawner : MonoBehaviour {
     
     if ((obstacles[index].transform.position - player.position).magnitude > maxDistance)
     {
-      Rigidbody2D body = obstacles[index].GetComponent<Rigidbody2D> ();
-
       if (Random.Range(0.0f, 1.0f) < 0.8f)
       {
         obstacles[index].transform.position = new Vector2(player.position.x + Random.Range(-maxDistance / 2, maxDistance / 2), player.position.y - (maxDistance / 2) - Random.Range(maxDistance / 2, 0));
@@ -55,11 +58,10 @@ public class ObstacleSpawner : MonoBehaviour {
       {
         obstacles[index].transform.position = new Vector3(player.position.x + Random.Range(-maxDistance / 2, maxDistance / 2), player.position.y + (maxDistance / 2) + Random.Range(0, maxDistance / 2));
       }
-      float slc = Random.Range(0.25f, 10);
+      float slc = Random.Range(1, 10);
       obstacles[index].transform.localScale = new Vector3(slc, slc, 1);
       obstacles[index].transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
       obstacles[index].transform.parent = transform;
-      body.AddForce(new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
     }
   }
 }

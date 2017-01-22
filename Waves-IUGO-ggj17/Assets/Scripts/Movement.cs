@@ -15,8 +15,7 @@ public class Movement : MonoBehaviour
     anim = GetComponent<Animator>();
     t = transform;
     rb = GetComponent<Rigidbody2D>();
-    rb.drag = speed * 0.95f;
-    rb.angularDrag = turnSpeed * 0.02f;
+    rb.drag = speed * 0.9f;
 	}
 	
 	// Update is called once per frame

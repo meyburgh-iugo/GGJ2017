@@ -49,7 +49,11 @@ public class Photon : MonoBehaviour
   {
     if(collision.gameObject.CompareTag("Obstacle"))
     {
-      ServiceLocator.GetAudioManager().Register(AudioManager.Clips.SONAR);
+      AudioManager audio = ServiceLocator.GetAudioManager ();
+      if (audio != null)
+      {
+        audio.Register (AudioManager.Clips.SONAR);
+      }
     }
 
     if (tracer)
