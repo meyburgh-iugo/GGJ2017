@@ -18,7 +18,7 @@ public class PlayerDie : MonoBehaviour
   void Start ()
   {
     DeepestText = GameObject.Find("Deepest").GetComponent<Text>();
-    DeepestText.text = (Mathf.Abs(PlayerPrefs.GetInt("Deepest", 0))).ToString();
+    DeepestText.text = "deepest: " + (Mathf.Abs(PlayerPrefs.GetInt("Deepest", 0))).ToString() + " m";
     DeepText = GameObject.Find("Deep").GetComponent<Text>();
     NewRecord = GameObject.Find("NewRecord").GetComponent<Text>();
     NewRecord.enabled = false;
@@ -40,7 +40,7 @@ public class PlayerDie : MonoBehaviour
     }
     else
     {
-      DeepText.enabled = true;
+      DeepText.enabled = false;
     }
 
     GetComponent<Movement>().enabled = false;
