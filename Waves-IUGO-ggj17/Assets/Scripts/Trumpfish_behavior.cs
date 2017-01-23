@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Trumpfish_behavior : MonoBehaviour
 {
   public float RadiusOfView = 1;
+  public float GiveUpDistance = 0.2f;
   public float speed = 0.2f;
 
   private Transform Player;
@@ -15,6 +16,7 @@ public class Trumpfish_behavior : MonoBehaviour
 
   private string[][] speeches;
   private Queue<MessagePooler.MessagePiece> messagesQueue;
+  private bool madeHisPoint;
 
   // Use this for initialization
   void Start()
@@ -37,13 +39,15 @@ public class Trumpfish_behavior : MonoBehaviour
 
     messenger = GetComponentInChildren<MessageFade>();
     messenger.OnFinishFade += DequeueMessage;
+
+    madeHisPoint = false;
   }
 
   // Update is called once per frame
   void Update()
   {
     Vector2 dir = transform.position - Player.position;
-    if (dir.magnitude < RadiusOfView)
+    if (dir.magnitude < RadiusOfView && !madeHisPoint)
     {
       if (!messenger.IsPlaying)
       {
@@ -56,6 +60,9 @@ public class Trumpfish_behavior : MonoBehaviour
       rb.velocity = Vector2.zero;
       rb.AddForce(-dir.normalized * speed, ForceMode2D.Impulse);
       anim.SetFloat("Speed", rb.velocity.x);
+
+      if (dir.magnitude < GiveUpDistance)
+        madeHisPoint = true;
     }
     else if (rb.velocity.magnitude < 0.1)
     {
