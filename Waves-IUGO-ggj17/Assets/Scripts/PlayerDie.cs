@@ -47,6 +47,7 @@ public class PlayerDie : MonoBehaviour
     }
 
     GetComponent<Movement>().enabled = false;
+    GetComponent<Animator>().SetTrigger("Death");
 
     yield return new WaitForSeconds(1.0f);
 
@@ -117,11 +118,17 @@ public class PlayerDie : MonoBehaviour
     SceneManager.LoadScene("2_Gameplay");
   }
 
+  private bool explode = false;
+  void OnFrontDeathAnimation()
+  {
+    explode = true;
+  }
+
   public IEnumerator DelayRestart()
   {
-    yield return new WaitForSeconds(2);
-    if(Random.value < 0.333)
+    if(explode)
     {
+      yield return new WaitForSeconds(2);
       gameObject.GetComponent<SpriteRenderer>().enabled = false;
       gameObject.GetComponentInChildren<ParticleSystem>().Stop();
       GameObject expolsionEffect = Instantiate(DeathEffectPrefab, gameObject.transform.position, Quaternion.identity);

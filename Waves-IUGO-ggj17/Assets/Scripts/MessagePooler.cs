@@ -39,6 +39,11 @@ public class MessagePooler : Singleton<MessagePooler>
     }
 
     int deaths = PlayerPrefs.GetInt("StartingText", 0);
+    if (deaths < 2)
+    { 
+      PlayerPrefs.SetInt("StartingText", deaths + 1);
+    }
+
     float fIn = 1.5f;
     float fOut = 0.5f;
     for (int i = 0; i < messages[deaths % messages.Length].Length; i++)
