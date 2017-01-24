@@ -1,2 +1,7 @@
-Practice_Area/P1/Temp/
-Practice_Area/P1/Library/
+*/Temp/
+*/Library/
+Waves-IUGO-ggj17/obj
+*.userprefs
+*.csproj
+*.sln
+*.suo
