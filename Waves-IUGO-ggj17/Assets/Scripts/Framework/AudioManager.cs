@@ -170,6 +170,11 @@ public class AudioManager
     if (sources[nextIdxAvailable] == null)
         Debug.Log("Source " + nextIdxAvailable + " is null");
 
+    if (obj.clip == null) {
+      Debug.Log ("Clip is null");
+      return;
+    }
+
     sources[nextIdxAvailable].clip = obj.clip;
     sources[nextIdxAvailable].volume = obj.volume;
     sources[nextIdxAvailable].Play();
