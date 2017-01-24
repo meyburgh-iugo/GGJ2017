@@ -174,16 +174,18 @@ public class AudioManager
     sources[nextIdxAvailable].volume = obj.volume;
     sources[nextIdxAvailable].Play();
     // registering callback for ending play.
-    // FIXME: ServiceLocator.Instance.StartCoroutine(DelayedCallback(obj.clip.length, AudioFinished, nextIdxAvailable));
+    ServiceLocator.Instance.StartCoroutine(DelayedCallback(obj.clip.length, AudioFinished, nextIdxAvailable));
 
-    // find next position availabel
+    // find next position available
     for (int i = 0; i < MAX_AUDIO; i++)
-    if (!sources[i].isPlaying)
     {
-      nextIdxAvailable = i;
-      return;
+      if (!sources[i].isPlaying)
+      {
+        nextIdxAvailable = i;
+        return;
+      }
     }
-    // flag for no position avaialable 
+    // flag for no position available 
     nextIdxAvailable = -1;
   }
 

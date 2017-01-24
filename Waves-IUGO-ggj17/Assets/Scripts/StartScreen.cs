@@ -15,7 +15,7 @@ public class StartScreen : MonoBehaviour {
   void Awake()
   {
     Text = transform.FindChild("Score").GetComponent<Text>();
-    Text.text = "Deepest: " + PlayerPrefs.GetInt("Deepest") + "m";
+    Text.text = string.Format("Deepest distances:\nNormal: {0} m\nHard: {1} m\nNightmare: {2} m", PlayerPrefs.GetInt("Deepest_Normal"), PlayerPrefs.GetInt("Deepest_Hard"), PlayerPrefs.GetInt("Deepest_Nightmare"));
 
     CanvasCamera = gameObject.GetComponent<Canvas>().worldCamera;
     WaterEffect = CanvasCamera.GetComponent<WaterDistortion>();

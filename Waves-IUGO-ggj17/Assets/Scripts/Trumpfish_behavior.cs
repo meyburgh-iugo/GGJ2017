@@ -8,6 +8,7 @@ public class Trumpfish_behavior : MonoBehaviour
   public float RadiusOfView = 1;
   public float GiveUpDistance = 0.2f;
   public float speed = 0.2f;
+  public float maxDepth = -60.0f;
 
   private Transform Player;
   private Rigidbody2D rb;
@@ -47,7 +48,12 @@ public class Trumpfish_behavior : MonoBehaviour
   void Update()
   {
     Vector2 dir = transform.position - Player.position;
-    if (dir.magnitude < RadiusOfView && !madeHisPoint)
+    if (transform.position.y < maxDepth)
+    {
+      rb.velocity = new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(0.05f, 0.1f));
+      anim.SetFloat("Speed", rb.velocity.x);
+    }
+    else if (dir.magnitude < RadiusOfView && !madeHisPoint)
     {
       if (!messenger.IsPlaying)
       {
@@ -68,9 +74,7 @@ public class Trumpfish_behavior : MonoBehaviour
     {
       rb.AddForce(new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), ForceMode2D.Impulse);
       anim.SetFloat("Speed", rb.velocity.x);
-    }
-
-    
+    }  
   }
 
   public void QueueMessage(MessagePooler.MessagePiece message)

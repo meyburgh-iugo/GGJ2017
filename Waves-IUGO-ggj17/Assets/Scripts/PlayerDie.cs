@@ -34,10 +34,10 @@ public class PlayerDie : MonoBehaviour
 
     ServiceLocator.GetAudioManager().Register(AudioManager.Clips.EXPLOSION, 1);
 
-    if (transform.position.y < PlayerPrefs.GetInt("Deepest", 0))
+    if (transform.position.y < PlayerPrefs.GetInt("Deepest_" + ServiceLocator.GetDificultyString(), 0))
     {
-      PlayerPrefs.SetInt("Deepest", (int)transform.position.y);
-      DeepestText.text = (Mathf.Abs(PlayerPrefs.GetInt("Deepest", 0))).ToString();
+      PlayerPrefs.SetInt("Deepest_" + ServiceLocator.GetDificultyString(), -(int)transform.position.y);
+      DeepestText.text = (PlayerPrefs.GetInt("Deepest_" + ServiceLocator.GetDificultyString(), 0)).ToString();
       DeepText.enabled = false;
       NewRecord.enabled = true;
     }

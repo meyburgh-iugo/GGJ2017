@@ -6,9 +6,9 @@ using SNS;
 
 public enum EDifficulty
 {
-  Normal,
-  Hard,
-  Nightmare
+  Normal = 0,
+  Hard = 1,
+  Nightmare = 2
 }
 
 public class ServiceLocator : Singleton<ServiceLocator>
@@ -17,7 +17,7 @@ public class ServiceLocator : Singleton<ServiceLocator>
   static DataManager sDataManager;
   static InputHandler sInputHandler;
   static EventSystem sEventSystem;
-  public static EDifficulty Difficulty;
+  public static EDifficulty Difficulty = EDifficulty.Normal;
 
   protected override void Init()
   {
@@ -57,5 +57,21 @@ public class ServiceLocator : Singleton<ServiceLocator>
   {
     Debug.Assert(sEventSystem != null, "sEventSystem is null.");
     return sEventSystem;
+  }
+
+  public static string GetDificultyString()
+  {
+    string ret = "Normal";
+    switch(Difficulty)
+    {
+      case EDifficulty.Hard :
+        ret = "Hard";
+        break;
+      case EDifficulty.Nightmare:
+        ret = "Nightmare";
+        break;
+    }
+    return ret;
+
   }
 }
