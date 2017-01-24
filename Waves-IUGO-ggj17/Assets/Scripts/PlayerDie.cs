@@ -34,7 +34,7 @@ public class PlayerDie : MonoBehaviour
 
     ServiceLocator.GetAudioManager().Register(AudioManager.Clips.EXPLOSION, 1);
 
-    if (transform.position.y < PlayerPrefs.GetInt("Deepest_" + ServiceLocator.GetDificultyString(), 0))
+    if (-transform.position.y > PlayerPrefs.GetInt("Deepest_" + ServiceLocator.GetDificultyString(), 0))
     {
       PlayerPrefs.SetInt("Deepest_" + ServiceLocator.GetDificultyString(), -(int)transform.position.y);
       DeepestText.text = (PlayerPrefs.GetInt("Deepest_" + ServiceLocator.GetDificultyString(), 0)).ToString();
