@@ -52,7 +52,9 @@ public class Photon : MonoBehaviour
 
     } 
    
-    var position = collision.contacts[0].point + (collision.contacts[0].normal * 0.01f);
+    var contacts = new ContactPoint2D[1];
+    collision.GetContacts(contacts);
+    var position = contacts[0].point + (contacts[0].normal * 0.01f);
     var go = Instantiate(trace, position, Quaternion.identity);
     go.GetComponent<Trace>().Setup(maxLifeSpan, lifeSpan);
   } 
